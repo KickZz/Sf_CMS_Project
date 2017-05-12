@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %} Sf_Cms_Project {% endblock %}</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> {% block head %} {% endblock %} {% block stylesheets %}
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/latest/yeti/bootstrap.min.css" rel="stylesheet" integrity="sha384-HzUaiJdCTIY/RL2vDPRGdEQHHahjzwoJJzGUkYjHVzTwXFQ2QN/nVgX7tzoMW3Ov" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"> {% endblock %}
+    {% stylesheets 'bundles/SfCmsProjectCms/css/main.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+
+</head>
+
+<body>
+
+    {{ include("SfCmsProjectCmsBundle:Admin:navbar.html.twig") }}
+
+    <div class="menuAdmin">
+        {% block body %} {% endblock %}
+    </div>
+
+    <footer>
+
+    </footer>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% javascripts filter = 'jsqueeze' 'bundles/SfCmsProjectCms/js/main.js' %}
+<script type="text/javascript" src="{{ asset_url }}">
+</script>
+{% endjavascripts %}
+{% block javascript %} {% endblock %}
+
+
+
+
+
+</html>

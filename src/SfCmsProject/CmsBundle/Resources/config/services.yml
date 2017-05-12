@@ -1,0 +1,4 @@
+services:
+#    sf_cms_project_cms.example:
+#        class: SfCmsProject\CmsBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

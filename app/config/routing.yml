@@ -1,0 +1,5 @@
+sf_cms_project_cms:
+    resource: "@SfCmsProjectCmsBundle/Controller"
+    type: annotation
+    prefix:   /
+
