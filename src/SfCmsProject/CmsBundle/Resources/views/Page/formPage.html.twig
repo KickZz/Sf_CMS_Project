@@ -1,0 +1,73 @@
+
+<h4>Ajout de page</h4><hr>
+
+<form method="post" action="{{ path('add_page') }}">
+
+    {# Les erreurs générales du formulaire. #}
+<div id="erreur">{{ form_errors(form) }}</div>
+<div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.name, "Titre de la page", {'label_attr':{'class':'control-label'}}) }}
+
+    {# Génération de l'input. #}
+    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    <div id="erreur">{{ form_errors(form.name) }}</div>
+
+</div>
+
+<div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.content, "Contenu de la page", {'label_attr':{'class':'control-label'}}) }}
+
+    {# Génération de l'input. #}
+    {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    <div id="erreur">{{ form_errors(form.content) }}</div>
+</div>
+
+<div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.description, "Description de la page ( Utilisé dans les moteurs de recherches )", {'label_attr':{'class':'control-label'}}) }}
+
+    {# Génération de l'input. #}
+    {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    <div id="erreur">{{ form_errors(form.description) }}</div>
+</div>
+
+<div class="checkbox">
+    <label>
+    {# Génération de l'input. #}
+    {{ form_widget(form.contentArticle, {'attr': {'class': ''}}) }} Page qui contient les articles ?
+
+    </label>
+
+</div>
+
+<div class="checkbox">
+    <label>
+        {# Génération de l'input. #}
+        {{ form_widget(form.isHome, {'attr': {'class': ''}}) }} Page d'accueil du site ?
+
+    </label>
+
+</div>
+
+<div class="form-group">
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+
+</div>
+
+{# Génération automatique des champs pas encore écrits.#}
+  {{ form_rest(form) }}
+
+  {# Fermeture de la balise <form> du formulaire HTML #}
+</form>
+
+
+

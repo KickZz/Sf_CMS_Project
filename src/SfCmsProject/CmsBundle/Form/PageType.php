@@ -5,7 +5,7 @@ namespace SfCmsProject\CmsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class PageType extends AbstractType
 {
@@ -20,8 +20,7 @@ class PageType extends AbstractType
             ->add('contentArticle')
             ->add('description')
             //->add('keyWord')
-            ->add('isHome')
-            ->add('Ajouter',      SubmitType::class);
+            ->add('isHome');
     }
     
     /**

@@ -12,7 +12,7 @@ class CmsController extends Controller
 {
     /**
      * @param Request $request
-     * @Route("/{slug}", name="sf_cms_project_cms_homepage")
+     * @Route("/{slug}", name="homepage")
      * @return Response
      */
     public function indexAction(Request $request)

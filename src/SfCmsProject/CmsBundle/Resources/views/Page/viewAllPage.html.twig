@@ -1,0 +1,31 @@
+
+<table class="table table-striped table-hover ">
+    <thead>
+    <tr>
+        <th>Nom de la page</th>
+        <th>Contient les articles</th>
+        <th>Désignée comme page d'accueil</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for page in listPage %}
+
+    <tr>
+        <td>{{ page.name }}</td>
+        <td>{% if page.contentArticle == true %} Vrai {% else %} Faux {% endif %}</td>
+        <td>{% if page.isHome == true %} Vrai {% else %} Faux {% endif %}</td>
+        <td>
+            <div class="">
+                <a href="{{ path('edit_page', { 'id' : page.id }) }}" class="editPageForm btn btn-primary">Editer</a>
+                <button data-toggle="modal" data-backdrop="false" data-target="#formSupPage{{ page.id }}" class="btn btn-danger">Supprimer</button>
+                {{ include("SfCmsProjectCmsBundle:Page:fenetreSuppressPage.html.twig") }}
+            </div>
+        </td>
+    </tr>
+
+
+    {% endfor %}
+    </tbody>
+</table>
+

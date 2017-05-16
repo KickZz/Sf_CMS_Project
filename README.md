@@ -1,4 +1,10 @@
 CMS
 ===
 
-A Symfony project created on May 5, 2017, 10:38 am.
+Installation
+
+===
+
+php composer.phar install
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:update --force

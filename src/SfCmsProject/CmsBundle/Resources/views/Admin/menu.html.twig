@@ -2,37 +2,37 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">
+            <h2 class="panel-title">
                 <a class="lienMenu" data-parent="#menu" data-toggle="collapse" href="#page"><i class="fa fa-file-text-o" aria-hidden="true"></i> Page <i id="iconePage" class="fa fa-chevron-right pull-right" aria-hidden="true"></i></a>
-            </h3>
+            </h2>
         </div>
 
         <ul id="page" class="list-group collapse">
 
-            <li class="list-group-item"><a href="{{ path('sf_cms_project_cms_admin_add_page') }}" class="ajoutPage">Nouvelle Page</a>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingTemplateAjouterPage" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
-            <li class="list-group-item"><a href="{{ path('sf_cms_project_cms_admin_view_all_page') }}" class="listPage">Liste Page</a>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingTemplateListPage" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
+            <li class="list-group-item"><a href="{{ path('add_page') }}" class="ajoutPage">Nouvelle Page</a>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingTemplateAjouterPage" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
+            <li class="list-group-item"><a href="{{ path('view_all_page') }}" class="listPage">Liste Page</a>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingTemplateListPage" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
         </ul>
 
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">
+            <h2 class="panel-title">
                 <a class="lienMenu" data-parent="#menu" data-toggle="collapse" href="#article"><i class="fa fa-file-text-o" aria-hidden="true"></i> Article <i id="iconeArticle" class="fa fa-chevron-right pull-right" aria-hidden="true"></i></a>
-            </h3>
+            </h2>
         </div>
 
         <ul id="article" class="list-group collapse">
 
-            <li class="list-group-item"><a href="#newPost" data-toggle="tab">Nouvel Article</a></li>
-            <li class="list-group-item"><a href="#listePost" data-toggle="tab">Liste Article</a></li>
+            <li class="list-group-item"><a href="#" data-toggle="tab">Nouvel Article</a></li>
+            <li class="list-group-item"><a href="#" data-toggle="tab">Liste Article</a></li>
         </ul>
 
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">
+            <h2 class="panel-title">
                 <a class="lienMenu" data-parent="#menu" data-toggle="collapse" href="#reglage"><i class="fa fa-cogs" aria-hidden="true"></i> Réglages <i id="iconeReglage" class="fa fa-chevron-right pull-right" aria-hidden="true"></i></a>
-            </h3>
+            </h2>
         </div>
 
         <ul id="reglage" class="list-group collapse">
