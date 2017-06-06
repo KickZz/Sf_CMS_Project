@@ -1,13 +1,13 @@
 
-<h4>Ajout de page</h4><hr>
+<h3>Ajout de page</h3><hr>
 
-<form method="post" action="{{ path('add_page') }}">
+<form method="post" action="{{ path('add_page_valid') }}" class="addPageFormValid">
 
     {# Les erreurs générales du formulaire. #}
 <div id="erreur">{{ form_errors(form) }}</div>
 <div class="form-group">
     {# Génération du label. #}
-    {{ form_label(form.name, "Titre de la page", {'label_attr':{'class':'control-label'}}) }}
+    {{ form_label(form.name, "Titre de la page ( apparaît dans le menu de navigation ) ", {'label_attr':{'class':'control-label'}}) }}
 
     {# Génération de l'input. #}
     {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
@@ -39,19 +39,19 @@
     <div id="erreur">{{ form_errors(form.description) }}</div>
 </div>
 
-<div class="checkbox">
+<div class="">
     <label>
     {# Génération de l'input. #}
-    {{ form_widget(form.contentArticle, {'attr': {'class': ''}}) }} Page qui contient les articles ?
+        Page qui contient les articles ? {{ form_widget(form.contentPost) }}
 
     </label>
 
 </div>
 
-<div class="checkbox">
+<div class="">
     <label>
         {# Génération de l'input. #}
-        {{ form_widget(form.isHome, {'attr': {'class': ''}}) }} Page d'accueil du site ?
+        Page d'accueil du site ? {{ form_widget(form.isHome) }}
 
     </label>
 
