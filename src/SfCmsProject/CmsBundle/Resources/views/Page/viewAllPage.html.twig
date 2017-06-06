@@ -1,3 +1,4 @@
+<h3>Liste des Pages</h3><hr>
 
 <table class="table table-striped table-hover ">
     <thead>
@@ -13,12 +14,15 @@
 
     <tr>
         <td>{{ page.name }}</td>
-        <td>{% if page.contentArticle == true %} Vrai {% else %} Faux {% endif %}</td>
+        <td>{% if page.contentPost == true %} Vrai {% else %} Faux {% endif %}</td>
         <td>{% if page.isHome == true %} Vrai {% else %} Faux {% endif %}</td>
         <td>
-            <div class="">
-                <a href="{{ path('edit_page', { 'id' : page.id }) }}" class="editPageForm btn btn-primary">Editer</a>
-                <button data-toggle="modal" data-backdrop="false" data-target="#formSupPage{{ page.id }}" class="btn btn-danger">Supprimer</button>
+            <div class="btn-group">
+                <a href="{{ path('edit_page', { 'id' : page.id }) }}" class="editPageForm btn btn-default">Editer</a>
+                <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a data-toggle="modal" data-backdrop="false" data-target="#formSupPage{{ page.id }}" href="" class="">Supprimer</a></li>
+                </ul>
                 {{ include("SfCmsProjectCmsBundle:Page:fenetreSuppressPage.html.twig") }}
             </div>
         </td>

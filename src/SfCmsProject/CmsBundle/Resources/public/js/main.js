@@ -21,46 +21,53 @@ $(function () {
         $('#iconeReglage').removeClass('fa-chevron-down').addClass('fa-chevron-right');
     });
 
-    $('.ajoutPage').on('click', function (e) {
-            e.preventDefault();
-            $("#loadingTemplateAjouterPage").show();
+    function init() {
+        editPage();
+        suppressionPage();
 
-            $.ajax({
-                url: $(this).attr('href'),
-                success: function (response) {
-                    $("#loadingTemplateAjouterPage").hide();
-                    $("#templateLoad").html(response);
-                }
-            });
+    }
+
+    $('.ajoutPage').on('click', function (e) {
+        e.preventDefault();
+        $("#loadingTemplateAjouterPage").show();
+
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('href'),
+            success: function (response) {
+                $("#loadingTemplateAjouterPage").hide();
+                $("#templateLoad").html(response);
+                addPageValid();
+            }
         });
+    });
 
     $('.listPage').on('click', function (e) {
         e.preventDefault();
         $("#loadingTemplateListPage").show();
 
         $.ajax({
+            type: "POST",
             url: $(this).attr('href'),
             success: function (response) {
                 $("#loadingTemplateListPage").hide();
                 $("#templateLoad").html(response);
-                editPage();
-                suppressionPage();
+                init();
             }
         });
     });
-
     function editPage() {
         $('.editPageForm').on('click', function (e) {
             e.preventDefault();
             $("#loadingTemplateListPage").show();
 
             $.ajax({
+                type: "POST",
                 url: $(this).attr('href'),
                 success: function (response) {
                     $("#loadingTemplateListPage").hide();
                     $("#templateLoad").html(response);
                     editPageValid();
-
                 }
             });
         });
@@ -69,27 +76,56 @@ $(function () {
     function editPageValid() {
         $('.editPageFormValid').on('submit', function (e) {
             e.preventDefault();
+
             var name = $('#sfcmsproject_cmsbundle_page_name').val();
             var description = $('#sfcmsproject_cmsbundle_page_description').val();
             var content = $('#sfcmsproject_cmsbundle_page_content').val();
-            var contentArticle = $('#sfcmsproject_cmsbundle_page_contentArticle').val();
+            var contentPost = $('#sfcmsproject_cmsbundle_page_contentPost').val();
             var isHome = $('#sfcmsproject_cmsbundle_page_isHome').val();
             $("#loadingTemplateListPage").show();
 
             $.ajax({
+                type: "POST",
                 url: $(this).attr('action'),
                 data: {
                     name: name,
                     description: description,
                     content: content,
-                    contentArticle: contentArticle,
+                    contentPost: contentPost,
                     isHome: isHome
                 },
                 success: function (response) {
                     $("#loadingTemplateListPage").hide();
                     $("#templateLoad").html(response);
-                    editPage();
-                    suppressionPage();
+                    init();
+                }
+            });
+        });
+    }
+    function addPageValid() {
+        $('.addPageFormValid').on('submit', function (e) {
+            e.preventDefault();
+            var name = $('#sfcmsproject_cmsbundle_addpage_name').val();
+            var description = $('#sfcmsproject_cmsbundle_addpage_description').val();
+            var content = $('#sfcmsproject_cmsbundle_addpage_content').val();
+            var contentPost = $('#sfcmsproject_cmsbundle_addpage_contentPost').val();
+            var isHome = $('#sfcmsproject_cmsbundle_addpage_isHome').val();
+            $("#loadingTemplateAjouterPage").show();
+
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: {
+                    name: name,
+                    description: description,
+                    content: content,
+                    contentPost: contentPost,
+                    isHome: isHome
+                },
+                success: function (response) {
+                    $("#loadingTemplateAjouterPage").hide();
+                    $("#templateLoad").html(response);
+                    init();
                 }
             });
         });
@@ -108,6 +144,7 @@ $(function () {
 
 
             $.ajax({
+                type: "POST",
                 url: $(this).attr('action'),
                 method: $(this).attr('method'),
                 data: {
@@ -116,10 +153,7 @@ $(function () {
                 success: function (response) {
                     $("#loadingTemplateListPage").hide();
                     $("#templateLoad").html(response);
-                    editPage();
-                    suppressionPage();
-
-
+                    init();
                 }
             });
 

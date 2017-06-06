@@ -1,4 +1,4 @@
-<h4>Edition de page</h4><hr>
+<h3>Edition de page</h3><hr>
 
 <form method="post" action="{{ path('edit_page_valid', { 'id' : id }) }}" class="editPageFormValid">
 
@@ -6,10 +6,10 @@
     <div id="erreur">{{ form_errors(form) }}</div>
     <div class="form-group">
         {# Génération du label. #}
-        {{ form_label(form.name, "Titre de la page", {'label_attr':{'class':'control-label'}}) }}
+        {{ form_label(form.name, "Titre de la page ( apparaît dans le menu de navigation )", {'label_attr':{'class':'control-label'}}) }}
 
         {# Génération de l'input. #}
-        {{ form_widget(form.name, {'attr': {'class': 'form-control', 'id' : 'name', 'full_name' : 'name' }}) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
 
         {# Affichage des erreurs pour ce champ précis. #}
         <div id="erreur">{{ form_errors(form.name) }}</div>
@@ -21,7 +21,7 @@
         {{ form_label(form.content, "Contenu de la page", {'label_attr':{'class':'control-label'}}) }}
 
         {# Génération de l'input. #}
-        {{ form_widget(form.content, {'attr': {'class': 'form-control', 'id' : 'contenu', 'full-name' : 'contenu'}}) }}
+        {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
 
         {# Affichage des erreurs pour ce champ précis. #}
         <div id="erreur">{{ form_errors(form.content) }}</div>
@@ -32,25 +32,25 @@
         {{ form_label(form.description, "Description de la page ( Utilisé dans les moteurs de recherches )", {'label_attr':{'class':'control-label'}}) }}
 
         {# Génération de l'input. #}
-        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'id' : 'description', 'full-name' : 'description'}}) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
 
         {# Affichage des erreurs pour ce champ précis. #}
         <div id="erreur">{{ form_errors(form.description) }}</div>
     </div>
 
-    <div class="checkbox">
+    <div class="">
         <label>
             {# Génération de l'input. #}
-            {{ form_widget(form.contentArticle, {'attr': {'class': '', 'id' : 'contentArticle', 'full-name' : 'contentArticle'}}) }} Page qui contient les articles ?
+            Page qui contient les articles ? {{ form_widget(form.contentPost) }}
 
         </label>
 
     </div>
 
-    <div class="checkbox">
+    <div class="">
         <label>
             {# Génération de l'input. #}
-            {{ form_widget(form.isHome, {'attr': {'class': '', 'id' : 'isHome', 'full-name' : 'isHome'}}) }} Page d'accueil du site ?
+            Page d'accueil du site ? {{ form_widget(form.isHome) }}
 
         </label>
 
