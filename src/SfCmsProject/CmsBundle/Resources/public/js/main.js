@@ -1,25 +1,35 @@
 
 $(function () {
+    // On cache tous les gifs
     $("#loadingTemplateAjouterPage").hide();
     $("#loadingTemplateListPage").hide();
+
+
     $('#page').on('shown.bs.collapse', function () {
-        $('#iconePage').removeClass('fa-chevron-right').addClass('fa-chevron-down');
+        $('#iconePage').removeClass('fa fa-chevron-circle-right').addClass('fa fa-chevron-circle-down');
     });
     $('#page').on('hidden.bs.collapse', function () {
-        $('#iconePage').removeClass('fa-chevron-down').addClass('fa-chevron-right');
+        $('#iconePage').removeClass('fa fa-chevron-circle-down').addClass('fa fa-chevron-circle-right');
     });
     $('#article').on('shown.bs.collapse', function () {
-        $('#iconeArticle').removeClass('fa-chevron-right').addClass('fa-chevron-down');
+        $('#iconeArticle').removeClass('fa fa-chevron-circle-right').addClass('fa fa-chevron-circle-down');
     });
     $('#article').on('hidden.bs.collapse', function () {
-        $('#iconeArticle').removeClass('fa-chevron-down').addClass('fa-chevron-right');
+        $('#iconeArticle').removeClass('fa fa-chevron-circle-down').addClass('fa fa-chevron-circle-right');
     });
     $('#reglage').on('shown.bs.collapse', function () {
-        $('#iconeReglage').removeClass('fa-chevron-right').addClass('fa-chevron-down');
+        $('#iconeReglage').removeClass('fa fa-chevron-circle-right').addClass('fa fa-chevron-circle-down');
     });
     $('#reglage').on('hidden.bs.collapse', function () {
-        $('#iconeReglage').removeClass('fa-chevron-down').addClass('fa-chevron-right');
+        $('#iconeReglage').removeClass('fa fa-chevron-circle-down').addClass('fa fa-chevron-circle-right');
     });
+    $('#personnalisation').on('shown.bs.collapse', function () {
+        $('#iconePersonnalisation').removeClass('fa fa-chevron-circle-right').addClass('fa fa-chevron-circle-down');
+    });
+    $('#personnalisation').on('hidden.bs.collapse', function () {
+        $('#iconePersonnalisation').removeClass('fa fa-chevron-circle-down').addClass('fa fa-chevron-circle-right');
+    });
+
 
     function init() {
         editPage();
@@ -27,6 +37,7 @@ $(function () {
 
     }
 
+    // Charge le template du formulaire de création de page
     $('.ajoutPage').on('click', function (e) {
         e.preventDefault();
         $("#loadingTemplateAjouterPage").show();
@@ -41,7 +52,7 @@ $(function () {
             }
         });
     });
-
+    // Charge le template de la liste des pages
     $('.listPage').on('click', function (e) {
         e.preventDefault();
         $("#loadingTemplateListPage").show();
@@ -56,6 +67,8 @@ $(function () {
             }
         });
     });
+
+    // Charge le template d'édition de page
     function editPage() {
         $('.editPageForm').on('click', function (e) {
             e.preventDefault();
@@ -72,7 +85,7 @@ $(function () {
             });
         });
     }
-
+    // Enregistre les changement dans la BDD
     function editPageValid() {
         $('.editPageFormValid').on('submit', function (e) {
             e.preventDefault();
@@ -102,6 +115,7 @@ $(function () {
             });
         });
     }
+    // Enregistre l'ajout de page en BDD
     function addPageValid() {
         $('.addPageFormValid').on('submit', function (e) {
             e.preventDefault();
@@ -130,6 +144,8 @@ $(function () {
             });
         });
     }
+
+    // Supprime la page de la BDD
     function suppressionPage() {
 
 

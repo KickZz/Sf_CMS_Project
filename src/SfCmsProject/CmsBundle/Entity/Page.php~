@@ -22,9 +22,23 @@ class Page
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="orderMenu", type="integer")
+     */
+    private $orderMenu;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="insideMenu", type="boolean")
+     */
+    private $insideMenu;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=20)
      */
     private $name;
 
@@ -70,12 +84,49 @@ class Page
      */
     private $disabled;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="myClassIcon", type="string", length=100, nullable=true)
+     */
+    private $myClassIcon;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="idSubMenu", type="integer", nullable=true)
+     */
+    private $idSubMenu;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="insideSubMenu", type="boolean", nullable=true)
+     */
+    private $insideSubMenu;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="haveSubPage", type="boolean", nullable=true)
+     */
+    private $haveSubPage;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="numberSubPage", type="integer", nullable=true)
+     */
+    private $numberSubPage;
+
 
     public function __construct()
     {
 
         $this->disabled = false;
-
+        $this->orderMenu = 10000;
+        $this->insideMenu = false;
+        $this->insideSubMenu = false;
     }
 
     /**
@@ -254,5 +305,125 @@ class Page
     public function getDisabled()
     {
         return $this->disabled;
+    }
+
+    /**
+     * Set order
+     *
+     * @param integer $orderMenu
+     *
+     * @return Page
+     */
+    public function setOrderMenu($orderMenu)
+    {
+        $this->orderMenu = $orderMenu;
+
+        return $this;
+    }
+
+    /**
+     * Get orderMenu
+     *
+     * @return integer
+     */
+    public function getOrderMenu()
+    {
+        return $this->orderMenu;
+    }
+
+    /**
+     * Set insideMenu
+     *
+     * @param boolean $insideMenu
+     *
+     * @return Page
+     */
+    public function setInsideMenu($insideMenu)
+    {
+        $this->insideMenu = $insideMenu;
+
+        return $this;
+    }
+
+    /**
+     * Get insideMenu
+     *
+     * @return boolean
+     */
+    public function getInsideMenu()
+    {
+        return $this->insideMenu;
+    }
+
+    /**
+     * Set myClassIcon
+     *
+     * @param string $myClassIcon
+     *
+     * @return Page
+     */
+    public function setMyClassIcon($myClassIcon)
+    {
+        $this->myClassIcon = $myClassIcon;
+
+        return $this;
+    }
+
+    /**
+     * Get myClassIcon
+     *
+     * @return string
+     */
+    public function getMyClassIcon()
+    {
+        return $this->myClassIcon;
+    }
+
+    /**
+     * Set idSubMenu
+     *
+     * @param integer $idSubMenu
+     *
+     * @return Page
+     */
+    public function setIdSubMenu($idSubMenu)
+    {
+        $this->idSubMenu = $idSubMenu;
+
+        return $this;
+    }
+
+    /**
+     * Get idSubMenu
+     *
+     * @return integer
+     */
+    public function getIdSubMenu()
+    {
+        return $this->idSubMenu;
+    }
+
+    /**
+     * Set insideSubMenu
+     *
+     * @param boolean $insideSubMenu
+     *
+     * @return Page
+     */
+    public function setInsideSubMenu($insideSubMenu)
+    {
+        $this->insideSubMenu = $insideSubMenu;
+
+        return $this;
+    }
+
+    /**
+     * Get insideSubMenu
+     *
+     * @return boolean
+     */
+    public function getInsideSubMenu()
+    {
+        return $this->insideSubMenu;
     }
 }

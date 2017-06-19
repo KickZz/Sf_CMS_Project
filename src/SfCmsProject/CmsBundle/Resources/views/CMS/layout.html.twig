@@ -6,31 +6,16 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"> {% block head %} {% endblock %} {% block stylesheets %}
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" integrity="sha384-HzUaiJdCTIY/RL2vDPRGdEQHHahjzwoJJzGUkYjHVzTwXFQ2QN/nVgX7tzoMW3Ov" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> {% endblock %}
-
+    {% stylesheets 'bundles/SfCmsProjectCms/css/mainFront.css' 'bundles/SfCmsProjectCms/css/CustomBootstrap.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
 
 </head>
 <header>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <a class="navbar-brand" href="">Sf_Cms_Project</a>
-            </div>
-            <div class="collapse navbar-collapse" id="navBar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href=""><i class="fa fa-home" aria-hidden="true"></i> Accueil</a></li>
-                    <!--<li class=""><a href=""><i class="fa fa-lock" aria-hidden="true"></i></a></li>-->
-                </ul>
-            </div>
-        </div>
-    </nav>
+    {# Affichage de la navbar #}
+    {{ render(controller('SfCmsProjectCmsBundle:Cms:viewNavBar')) }}
 
 </header>
 
@@ -50,7 +35,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
 </script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-{% javascripts filter = 'jsqueeze' 'bundles/SfCmsProjectCms/js/main.js' %}
+{% javascripts filter = 'jsqueeze' 'bundles/SfCmsProjectCms/js/mainFront.js' %}
 <script type="text/javascript" src="{{ asset_url }}">
 </script> {% endjavascripts %}
 {% block javascript %} {% endblock %}
