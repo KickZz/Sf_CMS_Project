@@ -20,4 +20,21 @@ class CmsController extends Controller
     {
         return $this->render('SfCmsProjectCmsBundle:CMS:index.html.twig');
     }
+
+    /**
+     * @Route("/viewnavbar", name="view_navbar")
+     * @return Response
+     */
+    public function viewNavBarAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        // On récupère toutes les pages
+        $listPage = $em->getRepository('SfCmsProjectCmsBundle:Page')->findAllPageByOrderMenu();
+
+        return $this->render('SfCmsProjectCmsBundle:CMS:navbar.html.twig', array(
+            'listPage' => $listPage,
+        ));
+
+    }
 }

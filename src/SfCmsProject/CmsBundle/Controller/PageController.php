@@ -160,11 +160,11 @@ class PageController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @Route ("/cms/admin/addpagevalid", name="add_page_valid")
-     * @Method({"GET","POST"})
-     * @return Response
-     */
+ * @param Request $request
+ * @Route ("/cms/admin/addpagevalid", name="add_page_valid")
+ * @Method({"GET","POST"})
+ * @return Response
+ */
     public function addPageValidAction(Request $request){
 
         $em = $this->getDoctrine()->getManager();
@@ -198,12 +198,7 @@ class PageController extends Controller
         }
         else
         {
-            $form = $this->createForm(AddPageType::class, $page);
-
-
-            $response = $this->render('SfCmsProjectCmsBundle:Page:formPage.html.twig', array(
-                'form' => $form->createView()))->getContent();
-            return new Response($response);
+            throw new NotFoundHttpException("La page demandée n'existe pas");
         }
 
     }
@@ -225,6 +220,17 @@ class PageController extends Controller
 
             if ($this->isCsrfTokenValid('csrf_sup_page', $token)) {
 
+                // On vérifie si la page à des sous-page et si oui on les remets dans la liste des pages restante
+                if($page->getHaveSubPage() === true){
+                    $listSubPage = $em->getRepository('SfCmsProjectCmsBundle:Page')->findBy(array ('idSubMenu' => $page->getId()));
+                    foreach ($listSubPage as $subPage ){
+                        $subPage->setInsideMenu(false);
+                        $subPage->setInsideSubMenu(false);
+                        $subPage->setIdSubMenu(0);
+                        $subPage->setOrderMenu(10000);
+                        $em->flush();
+                    }
+                }
                 $em->remove($page);
                 $em->flush();
 

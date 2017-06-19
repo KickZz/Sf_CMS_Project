@@ -10,4 +10,21 @@ namespace SfCmsProject\CmsBundle\Repository;
  */
 class PageRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findAllPageByOrderMenu()
+    {
+        $qb = $this->createQueryBuilder('page');
+        $qb ->orderBy('page.orderMenu')
+        ;
+        return $qb->getQuery()->getResult();
+    }
+    public function findAllSubPageOfThisPage($id)
+    {
+        $qb = $this->createQueryBuilder('page');
+        $qb ->where('page.idSubMenu = :id')
+            ->setParameter('id', $id)
+        ;
+        return $qb->getQuery()->getResult();
+    }
+
 }

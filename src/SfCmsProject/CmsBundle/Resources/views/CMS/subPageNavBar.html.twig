@@ -1,0 +1,40 @@
+{% set idPage = page.id %}
+{% for page in listPage  %}
+    {% if page.insideSubMenu == true %}
+        {% if page.idSubMenu == idPage %}
+            {% if page.haveSubPage == true %}
+                <li class="dropdown dropdown-submenu hidden-xs hidden-sm hidden-md">
+                    <a href="#" aria-haspopup="true" aria-expanded="false"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }} </a>
+                    <ul class="dropdown-menu">
+                        {{ include('SfCmsProjectCmsBundle:CMS:subPageNavBar.html.twig') }}
+                    </ul>
+                </li>
+                <li>
+                    <div class="panel panel-default hidden-lg">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a href="#" aria-haspopup="true" aria-expanded="false"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }} </a>
+                                <a class="lienMenu pull-right lienMenuFront fa fa-chevron-circle-right" data-toggle="collapse" href=".menu{{ page.id }}" aria-hidden="true"></a>
+                            </h2>
+                        </div>
+                    </div>
+                    <ul class="list-group collapse menu{{ page.id }}">
+                        {{ include('SfCmsProjectCmsBundle:CMS:subPageNavBar.html.twig') }}
+                    </ul>
+                </li>
+
+            {% else %}
+                <li class="hidden-xs hidden-sm hidden-md"><a href="#"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }}</a></li>
+                <li>
+                    <div class="panel panel-default hidden-lg">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a href="#" aria-haspopup="true" aria-expanded="false"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }} </a>
+                            </h2>
+                        </div>
+                    </div>
+                </li>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endfor %}

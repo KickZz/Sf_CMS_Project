@@ -4,3 +4,71 @@ body {
 a.lienMenu:link{
     text-decoration: none;
 }
+li{
+    border-radius: 5px;
+}
+li.little-padding{
+    padding: 8px;
+}
+.listMenu > li{
+    list-style: none;
+}
+.listPageWithoutMenu > li{
+    list-style: none;
+}
+.listSubMenu > li{
+    list-style: none;
+}
+.listSubMenu {
+    margin: 5px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.listMenu{
+
+    padding-bottom: 25px;
+    padding-top: 0;
+
+}
+.listPageWithoutMenu {
+
+    padding-bottom: 25px;
+    padding-top: 0;
+
+}
+.box{
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+#saveMenu{
+    display: none;
+}
+.subMenu{
+    position : relative;
+    right : 100px;
+}
+.blue{
+    color: rgba(23,83,178,0.84);
+}
+.ui-autocomplete {
+    max-height: 300px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+/* IE 6 doesn't support max-height
+ * we use height instead, but this forces the menu to always be this tall
+ */
+* html .ui-autocomplete {
+    height: 300px;
+}
+#menu{
+    position: fixed;
+}
+.btnLoadViewTemplate {
+    margin-top: 5px;
+}
+
+
+
