@@ -1,7 +1,7 @@
 
 <h3>Ajout de page</h3><hr>
 
-<form method="post" action="{{ path('add_page_valid') }}" class="addPageFormValid">
+<form method="post" action="{{ path('add_page_valid') }}" class="addPageFormValid" novalidate>
 
     {# Les erreurs générales du formulaire. #}
 <div id="erreur">{{ form_errors(form) }}</div>
@@ -22,7 +22,7 @@
     {{ form_label(form.content, "Contenu de la page", {'label_attr':{'class':'control-label'}}) }}
 
     {# Génération de l'input. #}
-    {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+    {{ form_widget(form.content, {'attr': {'class': 'form-control tinymce'}}) }}
 
     {# Affichage des erreurs pour ce champ précis. #}
     <div id="erreur">{{ form_errors(form.content) }}</div>

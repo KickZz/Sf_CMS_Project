@@ -6,4 +6,9 @@ services:
         class: SfCmsProject\CmsBundle\Services\CountSubPage
         arguments:
             - "@doctrine.orm.entity_manager"
+    sf_cms_project_cms.CreateTemplateFile:
+        class: SfCmsProject\CmsBundle\Services\CreateTemplateFile
+    sf_cms_project_cms.SupTemplateFile:
+        class: SfCmsProject\CmsBundle\Services\SupTemplateFile
+
 

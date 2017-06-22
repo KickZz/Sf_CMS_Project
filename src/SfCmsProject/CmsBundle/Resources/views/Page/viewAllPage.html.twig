@@ -11,22 +11,23 @@
     </thead>
     <tbody>
     {% for page in listPage %}
-
-    <tr>
-        <td>{{ page.name }}</td>
-        <td>{% if page.contentPost == true %} Vrai {% else %} Faux {% endif %}</td>
-        <td>{% if page.isHome == true %} Vrai {% else %} Faux {% endif %}</td>
-        <td>
-            <div class="btn-group">
-                <a href="{{ path('edit_page', { 'id' : page.id }) }}" class="editPageForm btn btn-default">Editer</a>
-                <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a data-toggle="modal" data-backdrop="false" data-target="#formSupPage{{ page.id }}" href="" class="">Supprimer</a></li>
-                </ul>
-                {{ include("SfCmsProjectCmsBundle:Page:windowsSuppressPage.html.twig") }}
-            </div>
-        </td>
-    </tr>
+    {% if page.disabled == false %}
+        <tr>
+            <td>{{ page.name }}</td>
+            <td>{% if page.contentPost == true %} Vrai {% else %} Faux {% endif %}</td>
+            <td>{% if page.isHome == true %} Vrai {% else %} Faux {% endif %}</td>
+            <td>
+                <div class="btn-group">
+                    <a href="{{ path('edit_page', { 'id' : page.id }) }}" class="editPageForm btn btn-default">Editer</a>
+                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a data-toggle="modal" data-backdrop="false" data-target="#formSupPage{{ page.id }}" href="" class="">Supprimer</a></li>
+                    </ul>
+                    {{ include("SfCmsProjectCmsBundle:Page:windowsSuppressPage.html.twig") }}
+                </div>
+            </td>
+        </tr>
+    {% endif %}
 
 
     {% endfor %}

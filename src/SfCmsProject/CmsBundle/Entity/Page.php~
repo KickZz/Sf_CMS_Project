@@ -50,6 +50,12 @@ class Page
     private $content;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="template", type="string", length=25, nullable=true)
+     */
+    private $template;
+    /**
      * @var bool
      *
      * @ORM\Column(name="contentPost", type="boolean", nullable=true)
@@ -127,6 +133,8 @@ class Page
         $this->orderMenu = 10000;
         $this->insideMenu = false;
         $this->insideSubMenu = false;
+        $this->haveSubPage = false;
+        $this->numberSubPage = 0;
     }
 
     /**
@@ -425,5 +433,53 @@ class Page
     public function getInsideSubMenu()
     {
         return $this->insideSubMenu;
+    }
+
+    /**
+     * Set haveSubPage
+     *
+     * @param boolean $haveSubPage
+     *
+     * @return Page
+     */
+    public function setHaveSubPage($haveSubPage)
+    {
+        $this->haveSubPage = $haveSubPage;
+
+        return $this;
+    }
+
+    /**
+     * Get haveSubPage
+     *
+     * @return boolean
+     */
+    public function getHaveSubPage()
+    {
+        return $this->haveSubPage;
+    }
+
+    /**
+     * Set numberSubPage
+     *
+     * @param integer $numberSubPage
+     *
+     * @return Page
+     */
+    public function setNumberSubPage($numberSubPage)
+    {
+        $this->numberSubPage = $numberSubPage;
+
+        return $this;
+    }
+
+    /**
+     * Get numberSubPage
+     *
+     * @return integer
+     */
+    public function getNumberSubPage()
+    {
+        return $this->numberSubPage;
     }
 }

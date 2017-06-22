@@ -1,7 +1,7 @@
 <ul id="listPageWithoutMenu" class="listPageWithoutMenu well" data-update="{{ path('update_list_page') }}"><br>
     {% for page in listPage %}
         {% set idPage = page.id %}
-        {% if page.insideMenu == false and page.insideSubMenu == false %}
+        {% if page.insideMenu == false and page.insideSubMenu == false and page.disabled == false %}
             <li id="item-{{ page.id }}" class="ui-state-default box">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -32,7 +32,7 @@
                         <li class="list-group-item little-padding">
                             <em>Ajoutez des sous-pages ici : </em>
                             <ul class="listSubMenu list-group" data-update="{{ path('update_sub_menu', { 'id': idPage})}}">
-                                {% for page in listPage if page.insideSubMenu == true %}
+                                {% for page in listPage if page.insideSubMenu == true and page.disabled == false %}
                                     {% if page.idSubMenu == idPage %}
                                         {{ include('SfCmsProjectCmsBundle:Menu:listSubMenu.html.twig') }}
                                     {% endif %}

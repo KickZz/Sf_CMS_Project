@@ -1,25 +1,36 @@
 <h3>Liste des templates disponibles pour la création de page</h3><hr>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#listTemplate" data-toggle="tab" aria-expanded="true">Liste et édition des templates</a></li>
+    <li class=""><a href="#formAddTemplate" data-toggle="tab" aria-expanded="false">Ajouter un template</a></li>
+</ul><br>
+<div id="myTabContent" class="tab-content container-fluid">
+    <div class="tab-pane fade active in " id="listTemplate">
+        <div class="row">
+            <div class="col-md-9">
+                <h4>Aperçu de votre template</h4><hr>
+                <div id="loadViewTemplate">
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <a class="lienMenu formAjoutTemplate" data-toggle="collapse" href="#formAjoutTemplate"><i class="fa fa-plus-square" aria-hidden="true"></i> Ajouter un template de page <i id="iconeTemplate" class="fa fa-chevron-circle-right pull-right" aria-hidden="true"></i></a>
-        </h4>
+                </div>
+            </div>
+            <div class="col-md-3 well">
+                <h4>Vos templates de page</h4><hr>
+                <div id="listNameTemplate">
+                    {% for template in listTemplate %}
+                            <button class="btn btn-default btnLoadViewTemplate form-control" data-edit="{{ path('update_form_edit') }}" data-name="{{ template.name }}" data-path="{{ path('load_view_template')}}">{{ template.name }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row container-fluid" id="templateFormEdit">
+        </div>
+
     </div>
-    <div class="panel-body collapse" id="formAjoutTemplate">
+    <div class="tab-pane fade" id="formAddTemplate">
         {{ include('SfCmsProjectCmsBundle:Template:formTemplatePage.html.twig') }}
     </div>
 
 </div>
 
-<div class="col-md-9" id="loadViewTemplate">
-    {#{% include("SfCmsProjectCmsBundle:Template:" ~ {{ template.name }} ~ "'.html.twig'") %}#}
-</div>
-<div class="col-md-3 well">
-    <h4>Vos templates de page</h4><hr>
-    {% for template in listTemplate %}
-        <button class="btn btn-default btnLoadViewTemplate form-control" data-name="{{ template.name }}" data-path="{{ path('load_view_template')}}">{{ template.name }}</button>
-    {% endfor %}
-</div>
+
 
 

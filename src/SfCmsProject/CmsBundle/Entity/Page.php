@@ -50,6 +50,12 @@ class Page
     private $content;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="template", type="string", length=25, nullable=true)
+     */
+    private $template;
+    /**
      * @var bool
      *
      * @ORM\Column(name="contentPost", type="boolean", nullable=true)
@@ -475,5 +481,29 @@ class Page
     public function getNumberSubPage()
     {
         return $this->numberSubPage;
+    }
+
+    /**
+     * Set template
+     *
+     * @param string $template
+     *
+     * @return Page
+     */
+    public function setTemplate($template)
+    {
+        $this->template = $template;
+
+        return $this;
+    }
+
+    /**
+     * Get template
+     *
+     * @return string
+     */
+    public function getTemplate()
+    {
+        return $this->template;
     }
 }
