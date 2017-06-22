@@ -66,9 +66,21 @@ li.little-padding{
 #menu{
     position: fixed;
 }
-.btnLoadViewTemplate {
-    margin-top: 5px;
+.listVarTwig{
+    list-style: none;
+    max-height: 150px;
+    overflow: auto;
+    padding: 0;
 }
+#listNameTemplate{
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.btnLoadViewTemplate{
+    margin-bottom: 5px;
+}
+
 
 
 
