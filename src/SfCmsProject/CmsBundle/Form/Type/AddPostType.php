@@ -3,12 +3,10 @@
 namespace SfCmsProject\CmsBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
-class PageType extends AbstractType
+class AddPostType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -17,22 +15,16 @@ class PageType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('content')
-            ->add('description')
-            ->add('isHome', ChoiceType::class, array(
-                'choices' => array(
-                    'Oui' => 'Oui',
-                    'Non' => 'Non',
-                )));
+            ->add('content');
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'SfCmsProject\CmsBundle\Entity\Page'
+            'data_class' => 'SfCmsProject\CmsBundle\Entity\Post'
         ));
     }
 
@@ -41,7 +33,8 @@ class PageType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'sfcmsproject_cmsbundle_page';
+        return 'sfcmsproject_cmsbundle_addpost';
     }
+
 
 }

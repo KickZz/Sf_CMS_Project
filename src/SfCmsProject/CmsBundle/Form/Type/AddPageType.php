@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 
 class AddPageType extends AbstractType
@@ -20,11 +19,6 @@ class AddPageType extends AbstractType
         $builder
             ->add('name')
             ->add('content')
-            ->add('contentPost', ChoiceType::class, array(
-                'choices' => array(
-                    'Oui' => 'Oui',
-                    'Non' => 'Non',
-                )))
             ->add('description')
             ->add('isHome', ChoiceType::class, array(
                 'choices' => array(

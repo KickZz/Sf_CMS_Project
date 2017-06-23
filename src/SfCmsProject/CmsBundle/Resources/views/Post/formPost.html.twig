@@ -1,0 +1,41 @@
+
+<h3>Ajout d'article</h3><hr>
+
+<form method="post" action="{{ path('add_post_valid') }}" class="addPostFormValid" novalidate>
+
+    {# Les erreurs générales du formulaire. #}
+    <div id="erreur">{{ form_errors(form) }}</div>
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(form.name, "Titre de l'article", {'label_attr':{'class':'control-label'}}) }}
+
+        {# Génération de l'input. #}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+
+        {# Affichage des erreurs pour ce champ précis. #}
+        <div id="erreur">{{ form_errors(form.name) }}</div>
+
+    </div>
+
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(form.content, "Contenu de l'article", {'label_attr':{'class':'control-label'}}) }}
+
+        {# Génération de l'input. #}
+        {{ form_widget(form.content, {'attr': {'class': 'form-control tinymce'}}) }}
+
+        {# Affichage des erreurs pour ce champ précis. #}
+        <div id="erreur">{{ form_errors(form.content) }}</div>
+    </div>
+
+    <div class="form-group">
+
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+
+    </div>
+
+    {# Génération automatique des champs pas encore écrits.#}
+    {{ form_rest(form) }}
+
+    {# Fermeture de la balise <form> du formulaire HTML #}
+</form>

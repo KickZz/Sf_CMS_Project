@@ -1,0 +1,18 @@
+
+<div class="modal" id="formSupPost{{ post.id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h3 class="modal-title">Etes-vous sûr de vouloir supprimer cet article ?</h3>
+            </div>
+            <div class="modal-body">
+                <form action="{{ path('sup_post_valid', { 'id' : post.id }) }}" method="post" id="suppression{{ post.id }}" class="suppressionPost" data-post="{{post.id}}">
+                    <input type="submit" class="btn btn-danger" value="Oui">
+                    <button class="btn btn-success" data-dismiss="modal">Non</button>
+                    <input type="hidden"  id="csrf{{post.id}}" name="csrfSupPost" value="{{ csrf_token('csrf_sup_post') }}">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
