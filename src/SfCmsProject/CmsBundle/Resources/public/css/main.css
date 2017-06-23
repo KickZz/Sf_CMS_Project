@@ -80,6 +80,9 @@ li.little-padding{
 .btnLoadViewTemplate{
     margin-bottom: 5px;
 }
+#templateLoad{
+    overflow: auto;
+}
 
 
 

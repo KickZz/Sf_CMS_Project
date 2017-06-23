@@ -69,7 +69,7 @@ class Post
         
     $this->dateCreated = new \Datetime('now',new \DateTimeZone('Europe/Paris'));
     $this->suppress = false;
-    $this->author = "test";
+    $this->author = "Undefined";
         
     }
     

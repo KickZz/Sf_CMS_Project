@@ -55,12 +55,6 @@ class Page
      * @ORM\Column(name="template", type="string", length=25, nullable=true)
      */
     private $template;
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="contentPost", type="boolean", nullable=true)
-     */
-    private $contentPost;
 
     /**
      * @var string
@@ -193,30 +187,6 @@ class Page
     public function getContent()
     {
         return $this->content;
-    }
-
-    /**
-     * Set contentPost
-     *
-     * @param boolean $contentPost
-     *
-     * @return Page
-     */
-    public function setContentPost($contentPost)
-    {
-        $this->contentPost = $contentPost;
-
-        return $this;
-    }
-
-    /**
-     * Get contentPost
-     *
-     * @return bool
-     */
-    public function getContentPost()
-    {
-        return $this->contentPost;
     }
 
     /**

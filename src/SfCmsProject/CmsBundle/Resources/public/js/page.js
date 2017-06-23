@@ -11,12 +11,6 @@ $(function () {
     $('#page').on('hidden.bs.collapse', function () {
         $('#iconePage').removeClass('fa fa-chevron-circle-down').addClass('fa fa-chevron-circle-right');
     });
-    $('#article').on('shown.bs.collapse', function () {
-        $('#iconeArticle').removeClass('fa fa-chevron-circle-right').addClass('fa fa-chevron-circle-down');
-    });
-    $('#article').on('hidden.bs.collapse', function () {
-        $('#iconeArticle').removeClass('fa fa-chevron-circle-down').addClass('fa fa-chevron-circle-right');
-    });
     $('#reglage').on('shown.bs.collapse', function () {
         $('#iconeReglage').removeClass('fa fa-chevron-circle-right').addClass('fa fa-chevron-circle-down');
     });
@@ -43,7 +37,6 @@ $(function () {
             branding: false,
             height : 400,
             language_url: '../fr_FR.js',
-            language : 'fr_FR',
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect | fontselect",
             fontsize_formats: '8pt 11pt 10pt 12pt 14pt 18pt 24pt 36pt',
             font_format:'Andale Mono=andale mono,times;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;Comic Sans MS=comic sans ms,sans-serif;Courier New=courier new,courier;Georgia=georgia,palatino;Helvetica=helvetica;Impact=impact,chicago;Symbol=symbol;Tahoma=tahoma,arial,helvetica,sans-serif;Terminal=terminal,monaco;Times New Roman=times new roman,times;Trebuchet MS=trebuchet ms,geneva;Verdana=verdana,geneva;Webdings=webdings;Wingdings=wingdings,zapf dingbats'
@@ -111,7 +104,6 @@ $(function () {
             var name = $('#sfcmsproject_cmsbundle_page_name').val();
             var description = $('#sfcmsproject_cmsbundle_page_description').val();
             var content = $('#sfcmsproject_cmsbundle_page_content').val();
-            var contentPost = $('#sfcmsproject_cmsbundle_page_contentPost').val();
             var isHome = $('#sfcmsproject_cmsbundle_page_isHome').val();
             $("#loadingTemplateListPage").show();
 
@@ -122,7 +114,6 @@ $(function () {
                     name: name,
                     description: description,
                     content: content,
-                    contentPost: contentPost,
                     isHome: isHome
                 },
                 success: function (response) {
@@ -141,7 +132,6 @@ $(function () {
             var name = $('#sfcmsproject_cmsbundle_addpage_name').val();
             var description = $('#sfcmsproject_cmsbundle_addpage_description').val();
             var content = $('#sfcmsproject_cmsbundle_addpage_content').val();
-            var contentPost = $('#sfcmsproject_cmsbundle_addpage_contentPost').val();
             var isHome = $('#sfcmsproject_cmsbundle_addpage_isHome').val();
             $("#loadingTemplateAjouterPage").show();
 
@@ -152,7 +142,6 @@ $(function () {
                     name: name,
                     description: description,
                     content: content,
-                    contentPost: contentPost,
                     isHome: isHome
                 },
                 success: function (response) {

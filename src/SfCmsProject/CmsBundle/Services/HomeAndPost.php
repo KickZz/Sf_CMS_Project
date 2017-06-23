@@ -7,15 +7,9 @@ namespace SfCmsProject\CmsBundle\Services;
 class HomeAndPost
 {
 
-    public function homeAndPost($page, $contentPost, $isHome)
+    public function homeAndPost($page, $isHome)
     {
 
-        if($contentPost === "Oui") {
-            $page->setContentPost(true);
-        }
-        else{
-            $page->setContentPost(false);
-        }
         if($isHome === "Oui") {
             $page->setIsHome(true);
         }

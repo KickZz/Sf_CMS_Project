@@ -4,7 +4,6 @@
     <thead>
     <tr>
         <th>Nom de la page</th>
-        <th>Contient les articles</th>
         <th>Désignée comme page d'accueil</th>
         <th>Action</th>
     </tr>
@@ -14,7 +13,6 @@
     {% if page.disabled == false %}
         <tr>
             <td>{{ page.name }}</td>
-            <td>{% if page.contentPost == true %} Vrai {% else %} Faux {% endif %}</td>
             <td>{% if page.isHome == true %} Vrai {% else %} Faux {% endif %}</td>
             <td>
                 <div class="btn-group">

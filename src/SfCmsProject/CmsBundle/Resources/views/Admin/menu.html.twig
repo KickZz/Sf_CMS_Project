@@ -25,8 +25,8 @@
 
                 <ul id="article" class="list-group collapse">
 
-                    <li class="list-group-item"><a href="#" data-toggle="tab">Nouvel Article</a></li>
-                    <li class="list-group-item"><a href="#" data-toggle="tab">Liste Article</a></li>
+                    <li class="list-group-item"><a href="{{ path('add_post') }}" class="ajoutPost">Nouvel Article</a>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingTemplateAjouterPost" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
+                    <li class="list-group-item"><a href="{{ path('view_all_post') }}" class="listPost">Liste Article</a>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingTemplateListPost" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
                 </ul>
 
             </div>

@@ -135,10 +135,9 @@ class PageController extends Controller
             $page->setName($request->get('name'));
             $page->setContent($request->get('content'));
             $page->setDescription($request->get('description'));
-            $contentPost = $request->get('contentPost');
             $isHome = $request->get('isHome');
 
-            $this->container->get('sf_cms_project_cms.HomeAndPost')->homeAndPost($page, $contentPost, $isHome);
+            $this->container->get('sf_cms_project_cms.HomeAndPost')->homeAndPost($page, $isHome);
 
             $em->flush();
 
@@ -176,11 +175,9 @@ class PageController extends Controller
             $page->setName($request->get('name'));
             $page->setContent($request->get('content'));
             $page->setDescription($request->get('description'));
-
-            $contentPost = $request->get('contentPost');
             $isHome = $request->get('isHome');
 
-            $this->container->get('sf_cms_project_cms.HomeAndPost')->homeAndPost($page, $contentPost, $isHome);
+            $this->container->get('sf_cms_project_cms.HomeAndPost')->homeAndPost($page, $isHome);
 
 
             $em->persist($page);
