@@ -84,6 +84,8 @@ $(function () {
                     $("#loadingTemplateAjouterPost").hide();
                     $("#templateLoad").html(response);
                     init();
+                    $("#addPostSuccess").fadeIn(1000);
+                    $("#addPostSuccess").fadeOut(1000);
                 }
             });
         });
@@ -128,6 +130,8 @@ $(function () {
                     $("#loadingTemplateListPost").hide();
                     $("#templateLoad").html(response);
                     init();
+                    $("#editPostSuccess").fadeIn(1000);
+                    $("#editPostSuccess").fadeOut(1000);
                 }
             });
         });
@@ -158,6 +162,8 @@ $(function () {
                     $("#loadingTemplateListPost").hide();
                     $("#templateLoad").html(response);
                     init();
+                    $("#supPostSuccess").fadeIn(1000);
+                    $("#supPostSuccess").fadeOut(1000);
                 }
             });
 

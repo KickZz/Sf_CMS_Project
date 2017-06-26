@@ -17,5 +17,18 @@ class CreateTemplateFile
         fclose($file);
 
     }
+    /**
+     * @param $name
+     * @param $content
+     */
+    public function createTemplatePostFile($name,$content)
+    {
+        $titre = str_replace(' ','-',$name);
+        $createDir = __DIR__;
+        $file = fopen($createDir.'../../Resources/views/Template/CustomPost/'.$titre.'.html.twig',"a+" );
+        fwrite($file,$content);
+        fclose($file);
+
+    }
 
 }

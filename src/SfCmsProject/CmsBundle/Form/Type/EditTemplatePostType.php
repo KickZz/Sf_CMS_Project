@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
-class EditTemplateType extends AbstractType
+class EditTemplatePostType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -27,7 +27,7 @@ class EditTemplateType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'SfCmsProject\CmsBundle\Entity\Template'
+            'data_class' => 'SfCmsProject\CmsBundle\Entity\TemplatePost'
         ));
     }
 
@@ -36,7 +36,7 @@ class EditTemplateType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'sfcmsproject_cmsbundle_edittemplate';
+        return 'sfcmsproject_cmsbundle_edittemplate_post';
     }
 
 }

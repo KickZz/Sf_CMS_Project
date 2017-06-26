@@ -69,4 +69,28 @@ class Icon
     {
         return $this->nameIcon;
     }
+
+    /**
+     * Set viewIcon
+     *
+     * @param string $viewIcon
+     *
+     * @return Icon
+     */
+    public function setViewIcon($viewIcon)
+    {
+        $this->viewIcon = $viewIcon;
+
+        return $this;
+    }
+
+    /**
+     * Get viewIcon
+     *
+     * @return string
+     */
+    public function getViewIcon()
+    {
+        return $this->viewIcon;
+    }
 }

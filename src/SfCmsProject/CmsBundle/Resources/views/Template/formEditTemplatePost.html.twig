@@ -1,0 +1,58 @@
+<hr><h4>Edition de votre template</h4><hr>
+<div class="col-md-9">
+    <form method="post" action="{{ path('edit_template_post_valid') }}" class="editTemplatePostFormValid">
+
+        {# Les erreurs générales du formulaire. #}
+        <div id="erreur">{{ form_errors(formEdit) }}</div>
+        <div class="form-group">
+            {# Génération du label. #}
+            {{ form_label(formEdit.name, "Nom du template" , {'label_attr':{'class':'control-label'}}) }}
+
+            {# Génération de l'input. #}
+            {{ form_widget(formEdit.name, {'attr': {'class': 'form-control'}}) }}
+
+            {# Affichage des erreurs pour ce champ précis. #}
+            <div id="erreur">{{ form_errors(formEdit.name) }}</div>
+
+        </div>
+
+        <div class="form-group">
+            {# Génération du label. #}
+            {{ form_label(formEdit.content, "Contenu du template ( code source ) ", {'label_attr':{'class':'control-label'}}) }}
+
+            {# Génération de l'input. #}
+            {{ form_widget(formEdit.content, {'attr': {'class': 'form-control tinymce'}}) }}
+
+            {# Affichage des erreurs pour ce champ précis. #}
+            <div id="erreur">{{ form_errors(formEdit.content) }}</div>
+        </div>
+
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-primary">Editer le template</button>
+            <input type="button" class="btn btn-danger" data-toggle="modal" data-backdrop="false" data-target="#formSupTemplatePost" value="Supprimer le template">
+
+        </div>
+    </form>
+    <div class="modal" id="formSupTemplatePost">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h3 class="modal-title">Etes-vous sûr de vouloir supprimer ce template ?</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="button" class="btn btn-danger supTemplatePost" data-path="{{ path('sup_template_post_valid') }}" value="Supprimer le template">
+                    <button class="btn btn-success" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div  class="col-md-3 well containlistVarTwig">
+    <h4>Listes des variables twig disponibles</h4><hr>
+    <ul class="listVarTwig">
+        <li>post.name</li>
+        <li>post.content</li>
+    </ul>
+</div>

@@ -68,7 +68,7 @@ $(function () {
                     $("#loadingViewTemplatePage").hide();
                     $("#templateLoad").html(response);
                     addTemplateValid();
-                    loadViewTemplate();
+                    loadViewEditTemplate();
 
 
                 }
@@ -81,13 +81,13 @@ $(function () {
             e.preventDefault();
             var name = $(this).data('name');
             presentName = $(this).data('name');
-            var pathLoad = $(this).data('path');
+            thisPathLoad = $(this).data('path');
             pathFormEdit = $(this).data('edit');
             $("#loadingViewTemplatePage").show();
 
             $.ajax({
                 type: "POST",
-                url: pathLoad,
+                url: thisPathLoad,
                 data: {
                     name: name
                 },
@@ -100,7 +100,26 @@ $(function () {
             });
         });
     }
-    // Va chercher la vue du template en BDD
+    // Va chercher la vue du template en BDD après un edit
+    function loadViewEditTemplate() {
+            $("#loadingViewTemplatePage").show();
+
+            $.ajax({
+                type: "POST",
+                url: thisPathLoad,
+                data: {
+                    name: presentName
+                },
+                success: function (response) {
+                    $("#loadingViewTemplatePage").hide();
+                    $("#loadViewTemplate").html(response);
+                    loadDataFormEdit();
+                    loadViewTemplate();
+
+                }
+            });
+    }
+    // Supprime le template de la BDD
     function supTemplateValid() {
         $('.supTemplate').on('click', function (e) {
             e.preventDefault();
