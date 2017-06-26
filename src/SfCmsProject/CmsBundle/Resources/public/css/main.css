@@ -1,3 +1,4 @@
+/* afin d'avoir un affichage correct */
 body {
     padding-top: 70px;
 }
@@ -10,6 +11,7 @@ li{
 li.little-padding{
     padding: 8px;
 }
+/* on enleve le style des listes*/
 .listMenu > li{
     list-style: none;
 }
@@ -40,17 +42,38 @@ li.little-padding{
     margin-top: 5px;
     margin-bottom: 0;
 }
-
+/* Fait disparaitre les encarts d'information */
 #saveMenu{
     display: none;
 }
+#addPostSuccess{
+    display: none;
+}
+#addPageSuccess{
+    display: none;
+}
+#editPostSuccess{
+    display: none;
+}
+#editPageSuccess{
+     display: none;
+}
+#supPageSuccess{
+    display: none;
+}
+#supPostSuccess{
+    display: none;
+}
+/* position des sous menus */
 .subMenu{
     position : relative;
     right : 100px;
 }
+/* couleur icone d'info */
 .blue{
     color: rgba(23,83,178,0.84);
 }
+/* gestion de l'overflow de l'autocomplétion*/
 .ui-autocomplete {
     max-height: 300px;
     overflow-y: auto;
@@ -63,12 +86,13 @@ li.little-padding{
 * html .ui-autocomplete {
     height: 300px;
 }
+/* position du menu d'administration fixe */
 #menu{
     position: fixed;
 }
 .listVarTwig{
     list-style: none;
-    max-height: 150px;
+    max-height: 200px;
     overflow: auto;
     padding: 0;
 }
@@ -80,8 +104,10 @@ li.little-padding{
 .btnLoadViewTemplate{
     margin-bottom: 5px;
 }
+/* gestion de l'overflow au chargement des template en ajax et hauteur minimum pour l'affichage correct des tableaux */
 #templateLoad{
     overflow: auto;
+    min-height: 300px;
 }
 
 

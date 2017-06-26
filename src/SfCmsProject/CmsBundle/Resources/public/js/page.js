@@ -120,6 +120,8 @@ $(function () {
                     $("#loadingTemplateListPage").hide();
                     $("#templateLoad").html(response);
                     init();
+                    $("#editPageSuccess").fadeIn(1000);
+                    $("#editPageSuccess").fadeOut(1000);
                 }
             });
         });
@@ -148,6 +150,8 @@ $(function () {
                     $("#loadingTemplateAjouterPage").hide();
                     $("#templateLoad").html(response);
                     init();
+                    $("#addPageSuccess").fadeIn(1000);
+                    $("#addPageSuccess").fadeOut(1000);
                 }
             });
         });
@@ -178,6 +182,8 @@ $(function () {
                     $("#loadingTemplateListPage").hide();
                     $("#templateLoad").html(response);
                     init();
+                    $("#supPageSuccess").fadeIn(1000);
+                    $("#supPageSuccess").fadeOut(1000);
                 }
             });
 

@@ -1,6 +1,6 @@
 <h3>Edition d'article</h3><hr>
 
-<form method="post" action="{{ path('edit_post_valid', { 'id' : id }) }}" class="editPostFormValid">
+<form method="post" action="{{ path('edit_post_valid', { 'id' : id }) }}" class="editPostFormValid" novalidate>
 
     {# Les erreurs générales du formulaire. #}
     <div id="erreur">{{ form_errors(form) }}</div>

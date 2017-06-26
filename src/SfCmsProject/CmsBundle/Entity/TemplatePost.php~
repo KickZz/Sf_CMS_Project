@@ -5,12 +5,12 @@ namespace SfCmsProject\CmsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Template
+ * TemplatePost
  *
- * @ORM\Table(name="template")
- * @ORM\Entity(repositoryClass="SfCmsProject\CmsBundle\Repository\TemplateRepository")
+ * @ORM\Table(name="template_post")
+ * @ORM\Entity(repositoryClass="SfCmsProject\CmsBundle\Repository\TemplatePostRepository")
  */
-class Template
+class TemplatePost
 {
     /**
      * @var int
@@ -24,7 +24,7 @@ class Template
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=25, unique=true)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
@@ -34,6 +34,7 @@ class Template
      * @ORM\Column(name="content", type="text")
      */
     private $content;
+
 
     /**
      * Get id
@@ -50,7 +51,7 @@ class Template
      *
      * @param string $name
      *
-     * @return Template
+     * @return TemplatePost
      */
     public function setName($name)
     {
@@ -74,7 +75,7 @@ class Template
      *
      * @param string $content
      *
-     * @return Template
+     * @return TemplatePost
      */
     public function setContent($content)
     {
@@ -93,3 +94,4 @@ class Template
         return $this->content;
     }
 }
+
