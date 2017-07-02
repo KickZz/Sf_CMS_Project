@@ -28,7 +28,6 @@ class LoadUser extends AbstractFixture implements OrderedFixtureInterface
         $user->setSalt($str);
         $user->setPlainTextPassword("password00");
         $user->setPassword(md5($str.$user->getPlainTextPassword()));
-        // On définit uniquement le role ROLE_USER qui est le role de base
         $user->setRoles(array('ROLE_ADMIN'));
         $user->setEmail('admin@test.com');
         $user->setSignature('Administrateur');
