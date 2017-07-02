@@ -1,0 +1,26 @@
+<h3>Liste des Medias</h3><hr>
+
+{% if listMedia %}
+    {% for media in listMedia %}
+    <div class="col-xs-4 col-md-2">
+        <img class="img-thumbnail" src="{{ asset(media.webPath) }}" alt="{{ media.alt }}"/>
+        <input type="button" class="btn btn-danger col-xs-12 col-md-12" data-toggle="modal" data-backdrop="false" data-target="#formSupMedia{{ media.id }}" value="Supprimer">
+        <div class="modal" id="formSupMedia{{ media.id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <h3 class="modal-title">Etes-vous sûr de vouloir supprimer ce media ?</h3>
+                    </div>
+                    <div class="modal-body">
+                        <input type="button" class="btn btn-danger supTemplate" data-path="{{ path('sup_media_valid') }}" data-id="{{ media.id }}" value="Supprimer le média">
+                        <button class="btn btn-success" data-dismiss="modal">Non</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="text-center">Aucun Média</div>
+{% endif %}

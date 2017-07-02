@@ -1,0 +1,85 @@
+
+<h3>Ajout de page</h3><hr>
+
+<form method="post" action="{{ path('add_page_valid') }}" class="addPageFormValid" novalidate>
+
+    {# Les erreurs générales du formulaire. #}
+<div id="erreur">{{ form_errors(form) }}</div>
+<div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.name, "Titre de la page ( apparaît dans le menu de navigation ) ", {'label_attr':{'class':'control-label'}}) }}
+
+    {# Génération de l'input. #}
+    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    <div id="erreur">{{ form_errors(form.name) }}</div>
+
+</div>
+
+<div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.content, "Contenu de la page", {'label_attr':{'class':'control-label'}}) }}
+
+    {# Génération de l'input. #}
+    {{ form_widget(form.content, {'attr': {'class': 'form-control tinymce'}}) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    <div id="erreur">{{ form_errors(form.content) }}</div>
+</div>
+
+<div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.description, "Description de la page ( Utilisé dans les moteurs de recherches )", {'label_attr':{'class':'control-label'}}) }}
+
+    {# Génération de l'input. #}
+    {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    <div id="erreur">{{ form_errors(form.description) }}</div>
+</div>
+    <div class="form-group">
+        <label for="selectTemplate">Selection du template</label>
+        <select id="selectTemplate">
+            <option value="nothing">Aucun</option>
+            {% for template in listTemplate %}
+                <option value="{{ template.name }}">{{ template.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+<div class="">
+    <label>
+        {# Génération de l'input. #}
+        Page d'accueil du site ? {{ form_widget(form.isHome) }}
+
+    </label>
+
+</div>
+    <div class="">
+        <label>
+            {# Génération de l'input. #}
+            Contient les articles ( Important pour la pagination ) {{ form_widget(form.contentPost) }}
+
+        </label>
+
+    </div>
+
+
+<div class="form-group">
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <input type="hidden"  id="csrfAddPage" name="csrfAddPage" value="{{ csrf_token('csrf_add_page') }}">
+
+</div>
+
+  {# Fermeture de la balise <form> du formulaire HTML #}
+</form>
+{% block javascript %}
+    <script>
+        listPageArray = {{ listPage|raw }};
+        listImageArray = {{ listImage|raw }};
+    </script>
+{% endblock %}
+
+
+

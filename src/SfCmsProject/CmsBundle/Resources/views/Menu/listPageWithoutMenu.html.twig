@@ -1,0 +1,47 @@
+<ul id="listPageWithoutMenu" class="listPageWithoutMenu well" data-update="{{ path('update_list_page') }}"><br>
+    {% for page in listPage %}
+        {% set idPage = page.id %}
+        {% if page.insideMenu == false and page.insideSubMenu == false and page.disabled == false %}
+            <li id="item-{{ page.id }}" class="ui-state-default box">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">
+                            <a class="lienMenu linkList" data-page="{{ page.id }}" data-parent="#containerList" data-toggle="collapse" href="#page{{ page.id }}"><i id="templateIcon{{ page.id }}" class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }}
+                                <i id="iconePage{{ page.id }}" class="fa fa-plus-circle pull-right" aria-hidden="true"></i>
+                                <span id="templateCount{{ page.id }}" data-page="{{ page.id }}" class="templateCountSubMenu badge pull-right" data-path="{{path ('update_count_sub_page', { 'id': page.id})}}">{{ page.numberSubPage }}</span>
+                            </a>
+                        </h5>
+                    </div>
+
+                    <ul id="page{{ page.id }}" class="list-group collapse">
+
+                        <li class="list-group-item little-padding">
+                            Class CSS actuelle pour l'icône : <strong><span id="templateClass{{ page.id }}">{{ page.myClassIcon }}</span></strong>
+                            <form action="{{path ('update_class_page', { 'id': page.id})}}" method="post" id="classForm{{page.id}}" class="classFormIcon" data-page="{{page.id}}">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" required="required" class="form-control recherche-icone" data-id="{{ page.id }}" id="classCss{{page.id}}" title="Votre class css">
+                                        <span class="input-group-btn">
+                                            <input type="submit" class="btn btn-success" value="Modifier">
+                                        </span>
+                                    </div>
+                                </div>
+                                <input type="hidden"  id="csrf{{page.id }}" value="{{ csrf_token('csrf_maj_class') }}">
+                            </form>
+                        </li>
+                        <li class="list-group-item little-padding">
+                            <em>Ajoutez des sous-pages ici : </em>
+                            <ul class="listSubMenu list-group" data-update="{{ path('update_sub_menu', { 'id': idPage})}}">
+                                {% for page in listPage if page.insideSubMenu == true and page.disabled == false %}
+                                    {% if page.idSubMenu == idPage %}
+                                        {{ include('SfCmsProjectCmsBundle:Menu:listSubMenu.html.twig') }}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

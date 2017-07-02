@@ -1,0 +1,23 @@
+services:
+    sf_cms_project_cms.Home:
+        class: SfCmsProject\CmsBundle\Services\Home
+        arguments:
+            - "@doctrine.orm.entity_manager"
+    sf_cms_project_cms.CountSubPage:
+        class: SfCmsProject\CmsBundle\Services\CountSubPage
+        arguments:
+            - "@doctrine.orm.entity_manager"
+    sf_cms_project_cms.CreateTemplateFile:
+        class: SfCmsProject\CmsBundle\Services\CreateTemplateFile
+    sf_cms_project_cms.SupTemplateFile:
+        class: SfCmsProject\CmsBundle\Services\SupTemplateFile
+    sf_cms_project_cms.md5password.encoder:
+        class: SfCmsProject\CmsBundle\Services\CustomMd5PasswordEncoder
+    sf_cms_project_cms.SaltRandom:
+        class: SfCmsProject\CmsBundle\Services\SaltRandom
+    sf_cms_project_cms.ContentPost:
+        class: SfCmsProject\CmsBundle\Services\ContentPost
+
+
+
+

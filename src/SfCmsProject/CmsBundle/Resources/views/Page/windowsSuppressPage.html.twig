@@ -1,0 +1,18 @@
+
+    <div class="modal" id="formSupPage{{ page.id }}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h3 class="modal-title">Etes-vous sûr de vouloir supprimer cette page ?</h3>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('sup_page_valid', { 'id' : page.id }) }}" method="post" id="suppression{{ page.id }}" class="suppressionPage" data-page="{{page.id}}">
+                        <input type="submit" class="btn btn-danger" value="Oui">
+                        <button class="btn btn-success" data-dismiss="modal">Non</button>
+                        <input type="hidden"  id="csrf{{page.id}}" name="csrfSupPage" value="{{ csrf_token('csrf_sup_page') }}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,8 @@
+{% extends "SfCmsProjectCmsBundle:CMS:layout.html.twig" %}
+{% block title %}
+    {{ post.name }}
+{% endblock %}
+{% block body %}
+    {% include('SfCmsProjectCmsBundle:Template:CustomPost/'~ template.name ~'.html.twig') %}
+
+{% endblock %}

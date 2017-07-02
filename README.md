@@ -1,2 +1,11 @@
-# Sf_CMS_Project
-Création d'un CMS personnaliser utilisable avec Symfony 3
+CMS
+======================================
+
+Installation
+
+======================================
+
+php composer.phar install<br>
+php bin/console doctrine:database:create<br>
+php bin/console doctrine:schema:update --force<br>
+php bin/console doctrine:fixtures:load<br>

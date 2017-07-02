@@ -1,0 +1,43 @@
+<h3>Liste des templates disponibles pour la création de page</h3><hr>
+<div>
+    <i class="fa fa-info-circle blue fa-lg" aria-hidden="true"></i>
+    <strong>
+        Les templates de pages sont utilisées dès que l'utilisateur souhaite accéder à une page, si aucun template n'est sélectionné
+        lors de la création de cette dernière alors un template de base est appliqué.
+    </strong>
+</div><hr>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#listTemplate" data-toggle="tab" aria-expanded="true">Liste et édition des templates</a></li>
+    <li class=""><a href="#formAddTemplate" data-toggle="tab" aria-expanded="false">Ajouter un template</a></li>
+</ul><br>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade active in " id="listTemplate">
+            <div class="well">
+                <h4>Vos templates de page</h4><hr>
+                <div id="listNameTemplate">
+                    {% for template in listTemplate %}
+                        <button class="btn btn-default btnLoadViewTemplate form-control col-md-3" data-edit="{{ path('update_form_edit') }}" data-name="{{ template.name }}" data-path="{{ path('load_view_template')}}" data-reload="{{ path('reload_list_template')}}">{{ template.name }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="">
+                <h4>Aperçu de votre template</h4><hr>
+
+                <div id="loadViewTemplate" class="">
+                </div>
+
+            </div>
+
+        <div class="row container-fluid" id="templateFormEdit">
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="formAddTemplate">
+        {{ include('SfCmsProjectCmsBundle:Template:formTemplatePage.html.twig') }}
+    </div>
+
+</div>
+
+
+
+

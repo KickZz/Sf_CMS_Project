@@ -1,0 +1,12 @@
+{% extends "SfCmsProjectCmsBundle:CMS:layout.html.twig" %}
+
+{% block title %}
+    {{ page.name }}
+{% endblock %}
+{% block head %}
+    <meta name="description" content="{% if page.description %} {{ page.description }}{% endif %}" />
+{% endblock %}
+{% block body %}
+    {% include('SfCmsProjectCmsBundle:Template:Custom/'~ template.name ~'.html.twig') %}
+
+{% endblock %}

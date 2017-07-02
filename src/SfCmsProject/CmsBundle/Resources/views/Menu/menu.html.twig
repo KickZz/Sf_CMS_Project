@@ -1,0 +1,63 @@
+<h3>Création de votre menu de navigation</h3>
+<hr>
+<div>
+    <i class="fa fa-info-circle blue fa-lg" aria-hidden="true"></i><strong> Si vous souhaitez ajouter une icône au nom de votre page, ajoutez une classe css issus des icônes
+        <a href="http://fontawesome.io/icons/">fontawesome</a> <em>( ex: fa fa-home )</em>
+        ou des icônes
+        <a href="http://getbootstrap.com/components/#glyphicons"> glyphicons</a> <em>( ex: glyphicon glyphicon-home )</em>
+        en cliquant sur le nom de votre page.</strong>
+</div>
+<hr>
+<div class="container-fluid" id="containerListMenu">
+    <div class="row containerList" >
+        <div id="containerList" class="panel-group ">
+            <div class="col-md-6">
+                <h4>Votre Menu</h4>
+                <span id="templateListMenu">
+                    {{ include('SfCmsProjectCmsBundle:Menu:listMenu.html.twig') }}
+                </span>
+            </div>
+            <div class="col-md-6">
+                <h4>Liste page(s) restante(s)</h4>
+                <span id="templateListPageWithoutMenu">
+                    {{ include('SfCmsProjectCmsBundle:Menu:listPageWithoutMenu.html.twig') }}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+{% block javascript %}
+<script>
+    $( function() {
+
+        // autocomplétion sur les icônes
+        var list = {{ listIcon|raw }};
+        $(".recherche-icone").on('focus', function () {
+            var thisId = $(this).data('id');
+            inputId = ("#classCss" + thisId);
+
+        });
+        $(".recherche-icone").autocomplete({
+
+            source: list,
+            minLength: 2,
+            delay: 0,
+            focus: function (event, ui) {
+                $(inputId).val(ui.item.value);
+
+            },
+            select: function (event, ui) { // lors de la sélection d'une proposition
+                $(inputId).val(ui.item.value);
+            }
+        });
+        $(".recherche-icone").each(function() {
+
+            $(this).autocomplete("instance")._renderItem = function (ul, item) {
+                return $("<li>")
+                    .append("<div>" + item.desc +" "+ item.value + "</div>")
+                    .appendTo(ul);
+            };
+        })
+    })
+</script>
+{% endblock %}

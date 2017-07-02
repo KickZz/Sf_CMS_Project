@@ -1,0 +1,12 @@
+{% extends "SfCmsProjectCmsBundle::layout.html.twig" %}
+{% block body %}
+    {% for message in app.session.flashbag.get('notice')%}
+        <div class="col-md-offset-4 col-md-6 message-info alert alert-info text-center">
+        {# On affiche tous les messages flash dont le nom est « notice » #}
+            {{ message }}
+        </div>
+        {% endfor %}
+    {{ include("SfCmsProjectCmsBundle:Admin:menu.html.twig") }}
+{% endblock %}
+{% block javascript %}
+{% endblock %}

@@ -1,0 +1,60 @@
+<h3>Edition d'article</h3><hr>
+
+<form method="post" action="{{ path('edit_post_valid', { 'id' : id }) }}" class="editPostFormValid" novalidate>
+
+    {# Les erreurs générales du formulaire. #}
+    <div id="erreur">{{ form_errors(form) }}</div>
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(form.name, "Titre de l'article", {'label_attr':{'class':'control-label'}}) }}
+
+        {# Génération de l'input. #}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+
+        {# Affichage des erreurs pour ce champ précis. #}
+        <div id="erreur">{{ form_errors(form.name) }}</div>
+
+    </div>
+
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(form.content, "Contenu de l'article", {'label_attr':{'class':'control-label'}}) }}
+
+        {# Génération de l'input. #}
+        {{ form_widget(form.content, {'attr': {'class': 'form-control tinymce'}}) }}
+
+        {# Affichage des erreurs pour ce champ précis. #}
+        <div id="erreur">{{ form_errors(form.content) }}</div>
+    </div>
+    <div class="form-group">
+        <label for="selectTemplate">Selection du template</label>
+        <select id="selectTemplate">
+            <option value="nothing">Aucun</option>
+            {% for template in listTemplate %}
+                {% if template == post.template %}
+                    <option selected="selected" value="{{ template.name }}">{{ template.name }}</option>
+                {% else %}
+                    <option value="{{ template.name }}">{{ template.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+
+        <button type="submit" class="btn btn-primary editPostValid">Valider</button>
+        <input type="hidden"  id="csrfEditPost" name="csrfEditPost" value="{{ csrf_token('csrf_edit_post') }}">
+
+    </div>
+
+    {# Génération automatique des champs pas encore écrits.#}
+    {{ form_rest(form) }}
+
+    {# Fermeture de la balise <form> du formulaire HTML #}
+</form>
+{% block javascript %}
+    <script>
+        listPostArray = {{ listPost|raw }};
+        listImageArray = {{ listImage|raw }};
+    </script>
+{% endblock %}

@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="">Sf_Cms_Project</a>
+        </div>
+        <div class="collapse navbar-collapse navBar" >
+            <ul class="nav navbar-nav ">
+                {% for page in listPage %}
+                        {% if page.insideMenu == true and page.insideSubMenu == false %}
+                            {% if page.haveSubPage == true %}
+                                <li class="dropdown hidden-xs hidden-sm hidden-md">
+                                    <a href="{{ path('homepage', {'slug' : page.name })}}" aria-haspopup="true" aria-expanded="false"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }} <span class="caret hidden-xs"></span></a>
+                                    <ul class="dropdown-menu">
+                                        {{ include('SfCmsProjectCmsBundle:CMS:subPageNavBar.html.twig') }}
+                                    </ul>
+                                </li>
+                                <div class="panel-group hidden-lg">
+
+                                    <div class="panel panel-default ">
+                                        <div class="panel-heading">
+                                            <h2 class="panel-title">
+                                                <a href="{{ path('homepage', {'slug' : page.name })}}" aria-haspopup="true" aria-expanded="false"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }} </a>
+                                                <a class="lienMenu pull-right lienMenuFront fa fa-chevron-circle-right" data-toggle="collapse" href=".menu{{ page.id }}" aria-hidden="true"></a>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <ul class="list-group collapse menu{{ page.id }}">
+                                        {{ include('SfCmsProjectCmsBundle:CMS:subPageNavBar.html.twig') }}
+                                    </ul>
+                                </div>
+                            {% else %}
+                                <li class="hidden-xs hidden-sm hidden-md"><a href="{{ path('homepage', {'slug' : page.name })}}"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }}</a></li>
+                                <div class="hidden-lg">
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h2 class="panel-title">
+                                                <a href="{{ path('homepage', {'slug' : page.name })}}" aria-haspopup="true" aria-expanded="false"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }} </a>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>

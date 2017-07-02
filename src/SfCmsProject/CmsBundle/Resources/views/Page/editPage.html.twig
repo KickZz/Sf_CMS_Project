@@ -1,0 +1,100 @@
+<h3>Edition de page</h3><hr>
+
+<form method="post" action="{{ path('edit_page_valid', { 'id' : id }) }}" class="editPageFormValid" novalidate>
+
+    {# Les erreurs générales du formulaire. #}
+    <div id="erreur">{{ form_errors(form) }}</div>
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(form.name, "Titre de la page ( apparaît dans le menu de navigation )", {'label_attr':{'class':'control-label'}}) }}
+
+        {# Génération de l'input. #}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+
+        {# Affichage des erreurs pour ce champ précis. #}
+        <div id="erreur">{{ form_errors(form.name) }}</div>
+
+    </div>
+
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(form.content, "Contenu de la page", {'label_attr':{'class':'control-label'}}) }}
+
+        {# Génération de l'input. #}
+        {{ form_widget(form.content, {'attr': {'class': 'form-control tinymce'}}) }}
+
+        {# Affichage des erreurs pour ce champ précis. #}
+        <div id="erreur">{{ form_errors(form.content) }}</div>
+    </div>
+
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(form.description, "Description de la page ( Utilisé dans les moteurs de recherches )", {'label_attr':{'class':'control-label'}}) }}
+
+        {# Génération de l'input. #}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+
+        {# Affichage des erreurs pour ce champ précis. #}
+        <div id="erreur">{{ form_errors(form.description) }}</div>
+    </div>
+
+    <div class="form-group">
+        <label for="selectTemplate">Selection du template</label>
+        <select id="selectTemplate">
+            <option value="nothing">Aucun</option>
+            {% for template in listTemplate %}
+                {% if template == page.template %}
+                    <option selected="selected" value="{{ template.name }}">{{ template.name }}</option>
+                {% else %}
+                    <option value="{{ template.name }}">{{ template.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="selectHome">Page d'accueil du site ? </label>
+        <select id="selectHome">
+            {% if page.isHome == true %}
+                <option selected="selected" value="true">Oui</option>
+                <option  value="false">Non</option>
+            {% else %}
+                <option  value="true">Oui</option>
+                <option selected="selected" value="false">Non</option>
+            {% endif %}
+        </select>
+
+    </div>
+
+    <div class="form-group">
+        <label for="selectContentPost">Contient les articles ( Important pour la pagination ) </label>
+        <select id="selectContentPost">
+            {% if page.contentPost == true %}
+                <option selected="selected" value="true">Oui</option>
+                <option  value="false">Non</option>
+            {% else %}
+                <option  value="true">Oui</option>
+                <option selected="selected" value="false">Non</option>
+            {% endif %}
+        </select>
+
+    </div>
+
+    <div class="form-group">
+
+        <button type="submit" class="btn btn-primary editPageValid">Valider</button>
+        <input type="hidden"  id="csrfEditPage" name="csrfEditPage" value="{{ csrf_token('csrf_edit_page') }}">
+
+    </div>
+
+    {# Génération automatique des champs pas encore écrits.#}
+    {{ form_rest(form) }}
+
+    {# Fermeture de la balise <form> du formulaire HTML #}
+</form>
+{% block javascript %}
+    <script>
+        listPageArray = {{ listPage|raw }};
+        listImageArray = {{ listImage|raw }};
+    </script>
+{% endblock %}

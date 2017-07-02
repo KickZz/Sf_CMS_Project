@@ -1,0 +1,158 @@
+/* afin d'avoir un affichage correct */
+body {
+    padding-top: 70px;
+}
+a.lienMenu:link{
+    text-decoration: none;
+}
+li{
+    border-radius: 5px;
+}
+li.little-padding{
+    padding: 8px;
+}
+/* on enleve le style des listes*/
+.listMenu > li{
+    list-style: none;
+}
+.listPageWithoutMenu > li{
+    list-style: none;
+}
+.listSubMenu > li{
+    list-style: none;
+}
+.listSubMenu {
+    margin: 5px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.listMenu{
+
+    padding-bottom: 25px;
+    padding-top: 0;
+
+}
+.listPageWithoutMenu {
+
+    padding-bottom: 25px;
+    padding-top: 0;
+
+}
+.box{
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+/* Fait disparaitre les encarts d'information du menu*/
+#saveMenu{
+    display: none;
+}
+#addPostSuccess{
+    display: none;
+}
+#addPageSuccess{
+    display: none;
+}
+#editPostSuccess{
+    display: none;
+}
+#editPageSuccess{
+     display: none;
+}
+#supPageSuccess{
+    display: none;
+}
+#supPostSuccess{
+    display: none;
+}
+#editTemplatePageSuccess{
+    display: none;
+}
+#editTemplatePostSuccess{
+    display: none;
+}
+#addTemplatePageSuccess{
+    display: none;
+}
+#addTemplatePostSuccess{
+    display: none;
+}
+#removeTemplatePageSuccess{
+    display: none;
+}
+#removeTemplatePostSuccess{
+    display: none;
+}
+#addMediaSuccess{
+    display: none;
+}
+#addUserSuccess{
+    display: none;
+}
+#supUserSuccess{
+    display: none;
+}
+#editUserSuccess{
+    display: none;
+}
+#editProfilUserSuccess{
+    display: none;
+}
+/* position des sous menus */
+.subMenu{
+    position : relative;
+    right : 100px;
+}
+/* couleur icone d'info */
+.blue{
+    color: rgba(23,83,178,0.84);
+}
+/* gestion de l'overflow de l'autocomplétion*/
+.ui-autocomplete {
+    max-height: 300px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+/* IE 6 doesn't support max-height
+ * we use height instead, but this forces the menu to always be this tall
+ */
+* html .ui-autocomplete {
+    height: 300px;
+}
+/* position du menu d'administration fixe */
+#menu{
+    position: fixed;
+}
+/* hauteur minimal pour le menu */
+#containerListMenu{
+    min-height: 400px;
+}
+.listVarTwig{
+    list-style: none;
+    max-height: 200px;
+    overflow: auto;
+    padding: 0;
+}
+#listNameTemplate{
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.btnLoadViewTemplate{
+    margin-bottom: 5px;
+}
+/* gestion de l'overflow au chargement des template en ajax et hauteur minimum pour l'affichage correct des tableaux */
+#templateLoad{
+    overflow: auto;
+    min-height: 300px;
+    padding-bottom: 50px;
+}
+.carousel .item {
+    max-height: 500px;
+}
+.carousel img {
+    max-height: 500px;
+}
+
+
+

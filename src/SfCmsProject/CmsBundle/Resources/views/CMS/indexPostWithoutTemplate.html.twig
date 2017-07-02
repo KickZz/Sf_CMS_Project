@@ -1,0 +1,13 @@
+{% extends "SfCmsProjectCmsBundle:CMS:layout.html.twig" %}
+{% block title %}
+    {{ post.name }}
+{% endblock %}
+{% block body %}
+    <div class="well">
+        {{ post.name|raw }}
+    </div>
+    <div class="well">
+        {{ post.content|raw }}
+    </div>
+
+{% endblock %}
