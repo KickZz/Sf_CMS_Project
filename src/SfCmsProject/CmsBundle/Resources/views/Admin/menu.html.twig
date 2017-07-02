@@ -69,8 +69,9 @@
                 </div>
 
                 <ul id="reglage" class="list-group collapse">
-
-                    <li class="list-group-item"><a href="{{ path('view_user') }}" class="viewUser">Gestion utilisateur</a><span id="addUserSuccess" class="label label-success col-md-offset-1">Utilisateur ajouté</span><span id="editUserSuccess" class="label label-success col-md-offset-1">Utilisateur édité</span><span id="supUserSuccess" class="label label-success col-md-offset-1">Utilisateur supprimé</span>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingViewUser" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li class="list-group-item"><a href="{{ path('view_user') }}" class="viewUser">Gestion utilisateur</a><span id="addUserSuccess" class="label label-success col-md-offset-1">Utilisateur ajouté</span><span id="editUserSuccess" class="label label-success col-md-offset-1">Utilisateur édité</span><span id="supUserSuccess" class="label label-success col-md-offset-1">Utilisateur supprimé</span>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingViewUser" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
+                    {% endif %}
                     <li class="list-group-item"><a href="{{ path('edit_profil_user') }}" class="viewProfilUser">Profil</a><span id="editProfilUserSuccess" class="label label-success col-md-offset-1">Profil édité</span>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingViewProfilUser" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
 
                 </ul>
