@@ -3,6 +3,7 @@
 namespace SfCmsProject\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * TemplatePost
@@ -25,6 +26,7 @@ class TemplatePost
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -32,8 +34,14 @@ class TemplatePost
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotBlank()
      */
     private $content;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SfCmsProject\CmsBundle\Entity\Post", mappedBy="template")
+     */
+    private $post;
 
 
     /**
@@ -94,4 +102,3 @@ class TemplatePost
         return $this->content;
     }
 }
-

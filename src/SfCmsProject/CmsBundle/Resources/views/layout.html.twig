@@ -11,14 +11,13 @@
         <link class="testLink" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css">
     {% endblock %}
-    {% stylesheets 'bundles/SfCmsProjectCms/css/main.css' %}
+    {% stylesheets 'bundles/SfCmsProjectCms/css/main.css' 'bundles/SfCmsProjectCms/css/dropzone.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
     {% endstylesheets %}
 
 </head>
 
 <body>
-
     {{ include("SfCmsProjectCmsBundle:Admin:navbar.html.twig") }}
 
     <div class="menuAdmin">
@@ -34,7 +33,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-{% javascripts filter = 'jsqueeze' 'bundles/SfCmsProjectCms/js/page.js' 'bundles/SfCmsProjectCms/js/post.js' 'bundles/SfCmsProjectCms/js/createMenu.js' 'bundles/SfCmsProjectCms/js/template.js' 'bundles/SfCmsProjectCms/js/templatePost.js'%}
+{% javascripts filter = 'jsqueeze' 'bundles/SfCmsProjectCms/js/page.js' 'bundles/SfCmsProjectCms/js/post.js' 'bundles/SfCmsProjectCms/js/createMenu.js' 'bundles/SfCmsProjectCms/js/template.js' 'bundles/SfCmsProjectCms/js/templatePost.js' 'bundles/SfCmsProjectCms/js/media.js' 'bundles/SfCmsProjectCms/js/dropzone.js' 'bundles/SfCmsProjectCms/js/user.js' 'bundles/SfCmsProjectCms/js/fr_FR.js'%}
 <script type="text/javascript" src="{{ asset_url }}">
 </script>
 {% endjavascripts %}

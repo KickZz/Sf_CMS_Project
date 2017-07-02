@@ -39,9 +39,24 @@
 
                 <ul id="personnalisation" class="list-group collapse">
 
-                    <li class="list-group-item"><a href="{{ path('view_template') }}" class="viewTemplatePage">Template Page</a>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingViewTemplatePage" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
-                    <li class="list-group-item"><a href="{{ path('view_template_post') }}" class="viewTemplatePost">Template Article</a>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingViewTemplatePost" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
+                    <li class="list-group-item"><a href="{{ path('view_template') }}" class="viewTemplatePage">Template Page</a><span id="addTemplatePageSuccess" class="label label-success col-md-offset-1">Template ajouté</span><span id="editTemplatePageSuccess" class="label label-success col-md-offset-1">Template édité</span><span id="removeTemplatePageSuccess" class="label label-success col-md-offset-1">Template supprimé</span>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingViewTemplatePage" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
+                    <li class="list-group-item"><a href="{{ path('view_template_post') }}" class="viewTemplatePost">Template Article</a><span id="addTemplatePostSuccess" class="label label-success col-md-offset-1">Template ajouté</span><span id="editTemplatePostSuccess" class="label label-success col-md-offset-1">Template édité</span><span id="removeTemplatePostSuccess" class="label label-success col-md-offset-1">Template supprimé</span>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingViewTemplatePost" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
                     <li class="list-group-item"><a href="{{ path('menu') }}" class="menu">Menu</a><span id="saveMenu" class="label label-success col-md-offset-1">Menu enregistré</span>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingTemplateMenu" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
+
+                </ul>
+
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">
+                        <a class="lienMenu" data-parent="#menu" data-toggle="collapse" href="#media"><i class="fa fa-file-image-o" aria-hidden="true"></i> Média <i id="iconeMedia" class="fa fa-chevron-circle-right pull-right" aria-hidden="true"></i></a>
+                    </h2>
+                </div>
+
+                <ul id="media" class="list-group collapse">
+
+                    <li class="list-group-item"><a href="{{ path('media_storage') }}" class="mediaStorage">Bibliothèque de média</a><span id="removeMediaSuccess" class="label label-success col-md-offset-1">Media supprimé</span>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingMediaStorage" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
+                    <li class="list-group-item"><a href="{{ path('add_media') }}" class="addMedia">Ajouter un média</a><span id="addMediaSuccess" class="label label-success col-md-offset-1">Image ajoutée</span>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingAddMedia" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
 
                 </ul>
 
@@ -55,7 +70,8 @@
 
                 <ul id="reglage" class="list-group collapse">
 
-                    <li class="list-group-item"><a href="#" data-toggle="tab">Compte</a></li>
+                    <li class="list-group-item"><a href="{{ path('view_user') }}" class="viewUser">Gestion utilisateur</a><span id="addUserSuccess" class="label label-success col-md-offset-1">Utilisateur ajouté</span><span id="editUserSuccess" class="label label-success col-md-offset-1">Utilisateur édité</span><span id="supUserSuccess" class="label label-success col-md-offset-1">Utilisateur supprimé</span>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingViewUser" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
+                    <li class="list-group-item"><a href="{{ path('edit_profil_user') }}" class="viewProfilUser">Profil</a><span id="editProfilUserSuccess" class="label label-success col-md-offset-1">Profil édité</span>{% image 'bundles/SfCmsProjectCms/images/loading.gif' %}<img class="pull-right" id="loadingViewProfilUser" src='{{asset_url }}' alt='loading'>{% endimage %}</li>
 
                 </ul>
 

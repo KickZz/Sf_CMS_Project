@@ -1,0 +1,17 @@
+
+{% extends "SfCmsProjectCmsBundle:CMS:layout.html.twig" %}
+{% block title %}
+    {{ page.name }}
+{% endblock %}
+{% block head %}
+    <meta name="description" content="{% if page.description %} {{ page.description }}{% endif %}" />
+{% endblock %}
+{% block body %}
+   <div class="well">
+       {{ page.name|raw }}
+   </div>
+    <div class="well">
+        {{ page.content|raw }}
+    </div>
+
+{% endblock %}

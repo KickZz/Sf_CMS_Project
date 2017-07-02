@@ -42,7 +42,7 @@ li.little-padding{
     margin-top: 5px;
     margin-bottom: 0;
 }
-/* Fait disparaitre les encarts d'information */
+/* Fait disparaitre les encarts d'information du menu*/
 #saveMenu{
     display: none;
 }
@@ -62,6 +62,39 @@ li.little-padding{
     display: none;
 }
 #supPostSuccess{
+    display: none;
+}
+#editTemplatePageSuccess{
+    display: none;
+}
+#editTemplatePostSuccess{
+    display: none;
+}
+#addTemplatePageSuccess{
+    display: none;
+}
+#addTemplatePostSuccess{
+    display: none;
+}
+#removeTemplatePageSuccess{
+    display: none;
+}
+#removeTemplatePostSuccess{
+    display: none;
+}
+#addMediaSuccess{
+    display: none;
+}
+#addUserSuccess{
+    display: none;
+}
+#supUserSuccess{
+    display: none;
+}
+#editUserSuccess{
+    display: none;
+}
+#editProfilUserSuccess{
     display: none;
 }
 /* position des sous menus */
@@ -90,6 +123,10 @@ li.little-padding{
 #menu{
     position: fixed;
 }
+/* hauteur minimal pour le menu */
+#containerListMenu{
+    min-height: 400px;
+}
 .listVarTwig{
     list-style: none;
     max-height: 200px;
@@ -108,8 +145,14 @@ li.little-padding{
 #templateLoad{
     overflow: auto;
     min-height: 300px;
+    padding-bottom: 50px;
 }
-
+.carousel .item {
+    max-height: 500px;
+}
+.carousel img {
+    max-height: 500px;
+}
 
 
 

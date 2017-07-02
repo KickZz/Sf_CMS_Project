@@ -26,10 +26,24 @@
         {# Affichage des erreurs pour ce champ précis. #}
         <div id="erreur">{{ form_errors(form.content) }}</div>
     </div>
+    <div class="form-group">
+        <label for="selectTemplate">Selection du template</label>
+        <select id="selectTemplate">
+            <option value="nothing">Aucun</option>
+            {% for template in listTemplate %}
+                {% if template == post.template %}
+                    <option selected="selected" value="{{ template.name }}">{{ template.name }}</option>
+                {% else %}
+                    <option value="{{ template.name }}">{{ template.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
 
     <div class="form-group">
 
         <button type="submit" class="btn btn-primary editPostValid">Valider</button>
+        <input type="hidden"  id="csrfEditPost" name="csrfEditPost" value="{{ csrf_token('csrf_edit_post') }}">
 
     </div>
 
@@ -38,3 +52,9 @@
 
     {# Fermeture de la balise <form> du formulaire HTML #}
 </form>
+{% block javascript %}
+    <script>
+        listPostArray = {{ listPost|raw }};
+        listImageArray = {{ listImage|raw }};
+    </script>
+{% endblock %}

@@ -1,0 +1,3 @@
+{% for template in listTemplate %}
+    <button class="btn btn-default btnLoadViewTemplatePost form-control" data-edit="{{ path('update_form_edit_post') }}" data-name="{{ template.name }}" data-path="{{ path('load_view_template_post')}}" data-reload="{{ path('reload_list_template_post')}}">{{ template.name }}</button>
+{% endfor %}

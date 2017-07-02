@@ -26,5 +26,12 @@ class PageRepository extends \Doctrine\ORM\EntityRepository
         ;
         return $qb->getQuery()->getResult();
     }
+    public function getAll()
+    {
+        $qb = $this->createQueryBuilder('page');
+        $qb
+            ->where('page.disabled = false');
+        return $qb->getQuery();
+    }
 
 }

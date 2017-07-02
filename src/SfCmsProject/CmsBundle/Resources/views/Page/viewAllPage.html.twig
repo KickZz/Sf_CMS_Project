@@ -5,6 +5,7 @@
     <tr>
         <th>Nom de la page</th>
         <th>Désignée comme page d'accueil</th>
+        <th>Contient les articles</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -14,6 +15,7 @@
         <tr>
             <td>{{ page.name }}</td>
             <td>{% if page.isHome == true %} Vrai {% else %} Faux {% endif %}</td>
+            <td>{% if page.contentPost == true %} Vrai {% else %} Faux {% endif %}</td>
             <td>
                 <div class="btn-group">
                     <a href="{{ path('edit_page', { 'id' : page.id }) }}" class="editPageForm btn btn-default">Editer</a>

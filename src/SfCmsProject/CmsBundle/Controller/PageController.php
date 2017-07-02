@@ -17,27 +17,36 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class PageController extends Controller
 {
     /**
-     * @Route("/cms/admin", name="cms_admin")
+     * @param Request $request
+     * @Route("/cms/admin/security", name="cms_admin")
      * @Method({"GET"})
      * @return Response
      */
 
-    public function indexAction()
+    public function indexAction(Request $request)
     {
 
-        return $this->render('SfCmsProjectCmsBundle:Admin:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $page = $em->getRepository('SfCmsProjectCmsBundle:Page')->findOneBy(array('isHome'=> true));
+        // On test l'existence d'une page d'accueil
+        if ( $page === null ){
+            $request->getSession()->getFlashBag()->add('notice', 'Veuillez choisir une page d\'accueil');
+        }
+        return $this->render('SfCmsProjectCmsBundle:Admin:index.html.twig',array(
+            'page' => $page));
     }
 
     /**
      * @param Request $request
-     * @Route ("/cms/admin/addpage", name="add_page")
+     * @Route ("/cms/admin/security/addpage", name="add_page")
      * @return Response
      * @Method({"GET","POST"})
      */
     public function addPageAction(Request $request )
     {
 
-
+        $em = $this->getDoctrine()->getManager();
         // Si la requête est en ajax on affiche le formulaire
         if ($request->isXmlHttpRequest()) {
 
@@ -45,9 +54,30 @@ class PageController extends Controller
             $page = new Page();
             $form = $this->createForm(AddPageType::class, $page);
 
-
+            // Permet de creer le tableau contenant la liste de lien dans tinymce
+            $query = $em->getRepository('SfCmsProjectCmsBundle:Page')->getAll();
+            $list = $query->getArrayResult();
+            $listPage = array();
+            foreach ($list as $page)
+            {
+                $arrayTmp = array('title' => $page['name'] , 'value' => '/'.$page['name']);
+                $listPage[] = $arrayTmp;
+            }
+            // Permet de creer le tableau contenant la liste des images dans tinymce
+            $query = $em->getRepository('SfCmsProjectCmsBundle:Image')->getAll();
+            $list = $query->getArrayResult();
+            $listImage = array();
+            foreach ($list as $value)
+            {
+                $arrayTmp = array('title' => $value['title'] , 'value' => '../../../web/uploads/img/'.$value['url']);
+                $listImage[] = $arrayTmp;
+            }
+            $listTemplate = $em->getRepository('SfCmsProjectCmsBundle:Template')->findAll();
             $response = $this->render('SfCmsProjectCmsBundle:Page:formPage.html.twig', array(
-            'form' => $form->createView()))->getContent();
+                'listImage' => json_encode($listImage, JSON_UNESCAPED_UNICODE),
+                'listPage' => json_encode($listPage, JSON_UNESCAPED_UNICODE),
+                'listTemplate'=>$listTemplate,
+                'form' => $form->createView()))->getContent();
                 return new Response($response);
 
             }
@@ -59,7 +89,7 @@ class PageController extends Controller
 
     /**
      * @param Request $request
-     * @Route ("/cms/admin/viewallpage", name="view_all_page")
+     * @Route ("/cms/admin/security/viewallpage", name="view_all_page")
      * @Method({"GET","POST"})
      * @return Response
      */
@@ -91,20 +121,42 @@ class PageController extends Controller
      * @param Page $page
      * @param $id
      * @return Response
-     * @Route ("/cms/admin/editpage/{id}", name="edit_page", requirements={"id": "\d+"})
+     * @Route ("/cms/admin/security/editpage/{id}", name="edit_page", requirements={"id": "\d+"})
      * @Method({"GET","POST"})
      */
     public function editPageAction(Request $request, Page $page, $id){
 
+        $em = $this->getDoctrine()->getManager();
         // Si la requête est en Ajax
         if ($request->isXmlHttpRequest()) {
 
 
             // on crée un formulaire basé sur cette page
             $form = $this->createForm(PageType::class, $page);
-
-
+            // Permet de creer le tableau contenant la liste de lien dans tinymce
+            $query = $em->getRepository('SfCmsProjectCmsBundle:Page')->getAll();
+            $list = $query->getArrayResult();
+            $listPage = array();
+            foreach ($list as $value)
+            {
+                $arrayTmp = array('title' => $value['name'] , 'value' => '/'.$value['name']);
+                $listPage[] = $arrayTmp;
+            }
+            // Permet de creer le tableau contenant la liste des images dans tinymce
+            $query = $em->getRepository('SfCmsProjectCmsBundle:Image')->getAll();
+            $list = $query->getArrayResult();
+            $listImage = array();
+            foreach ($list as $value)
+            {
+                $arrayTmp = array('title' => $value['title'] , 'value' => '../../../web/uploads/img/'.$value['url']);
+                $listImage[] = $arrayTmp;
+            }
+            $listTemplate = $em->getRepository('SfCmsProjectCmsBundle:Template')->findAll();
             $response = $this->render('SfCmsProjectCmsBundle:Page:editPage.html.twig', array(
+                'listImage' => json_encode($listImage, JSON_UNESCAPED_UNICODE),
+                'listPage' => json_encode($listPage, JSON_UNESCAPED_UNICODE),
+                'listTemplate'=>$listTemplate,
+                'page'=>$page,
                 'id' => $id,
                 'form' => $form->createView()))->getContent();
 
@@ -123,7 +175,7 @@ class PageController extends Controller
      * @param Page $page
      * @return Response
      * @internal param $id
-     * @Route ("/cms/admin/editpagevalid/{id}", name="edit_page_valid", requirements={"id": "\d+"})
+     * @Route ("/cms/admin/security/editpagevalid/{id}", name="edit_page_valid", requirements={"id": "\d+"})
      * @Method({"GET","POST"})
      */
     public function editPageValidAction(Request $request, Page $page){
@@ -132,15 +184,25 @@ class PageController extends Controller
         // Si la requête est en Ajax
         if ($request->isXmlHttpRequest()) {
 
-            $page->setName($request->get('name'));
-            $page->setContent($request->get('content'));
-            $page->setDescription($request->get('description'));
-            $isHome = $request->get('isHome');
+            $token = $request->get('csrf');
+            // Verification du jeton csrf
+            if ($this->isCsrfTokenValid('csrf_edit_page', $token)) {
 
-            $this->container->get('sf_cms_project_cms.HomeAndPost')->homeAndPost($page, $isHome);
+                $page->setName($request->get('name'));
+                $page->setContent($request->get('content'));
+                $page->setDescription($request->get('description'));
 
-            $em->flush();
+                $page = $this->container->get('sf_cms_project_cms.ContentPost')->contentPost($page, $request->get('contentPost'));
 
+                if ($request->get('template') !== 'nothing'){
+                    $template = $em->getRepository('SfCmsProjectCmsBundle:Template')->findOneBy(array('name'=>$request->get('template')));
+                    $page->setTemplate($template);
+                }
+
+                $page = $this->container->get('sf_cms_project_cms.Home')->home($page, $request->get('isHome'));
+
+                $em->flush();
+            }
             // On récupère toutes les pages
             $listPage = $em->getRepository('SfCmsProjectCmsBundle:Page')->findAll();
 
@@ -160,7 +222,7 @@ class PageController extends Controller
 
     /**
  * @param Request $request
- * @Route ("/cms/admin/addpagevalid", name="add_page_valid")
+ * @Route ("/cms/admin/security/addpagevalid", name="add_page_valid")
  * @Method({"GET","POST"})
  * @return Response
  */
@@ -171,18 +233,25 @@ class PageController extends Controller
         // Si la requête est en Ajax
         if ($request->isXmlHttpRequest()) {
 
+            $token = $request->get('csrf');
 
-            $page->setName($request->get('name'));
-            $page->setContent($request->get('content'));
-            $page->setDescription($request->get('description'));
-            $isHome = $request->get('isHome');
+            if ($this->isCsrfTokenValid('csrf_add_page', $token)) {
 
-            $this->container->get('sf_cms_project_cms.HomeAndPost')->homeAndPost($page, $isHome);
+                $page->setName($request->get('name'));
+                $page->setContent($request->get('content'));
+                $page->setDescription($request->get('description'));
+                $page->setContentPost($request->get('contentPost'));
+                $page = $this->container->get('sf_cms_project_cms.ContentPost')->contentPost($page, $request->get('contentPost'));
+                if ($request->get('template') !== 'nothing'){
+                    $template = $em->getRepository('SfCmsProjectCmsBundle:Template')->findOneBy(array('name'=>$request->get('template')));
+                    $page->setTemplate($template);
+                }
+                $page = $this->container->get('sf_cms_project_cms.Home')->home($page, $request->get('isHome'));
 
 
-            $em->persist($page);
-            $em->flush();
-
+                $em->persist($page);
+                $em->flush();
+            }
             // On récupère toutes les pages
             $listPage = $em->getRepository('SfCmsProjectCmsBundle:Page')->findAll();
 
@@ -204,7 +273,7 @@ class PageController extends Controller
      * @param Request $request
      * @param Page $page
      * @return Response
-     * @Route ("/cms/admin/suppagevalid/{id}", name="sup_page_valid", requirements={"id": "\d+"})
+     * @Route ("/cms/admin/security/suppagevalid/{id}", name="sup_page_valid", requirements={"id": "\d+"})
      * @Method({"GET","POST"})
      */
     public function supPageValidAction(Request $request, Page $page){
