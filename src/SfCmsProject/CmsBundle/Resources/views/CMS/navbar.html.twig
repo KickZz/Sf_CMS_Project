@@ -15,7 +15,7 @@
                         {% if page.insideMenu == true and page.insideSubMenu == false %}
                             {% if page.haveSubPage == true %}
                                 <li class="dropdown hidden-xs hidden-sm hidden-md">
-                                    <a href="#" aria-haspopup="true" aria-expanded="false"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }} <span class="caret hidden-xs"></span></a>
+                                    <a href="{{ path('homepage', {'slug' : page.name })}}" aria-haspopup="true" aria-expanded="false"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }} <span class="caret hidden-xs"></span></a>
                                     <ul class="dropdown-menu">
                                         {{ include('SfCmsProjectCmsBundle:CMS:subPageNavBar.html.twig') }}
                                     </ul>
@@ -25,7 +25,7 @@
                                     <div class="panel panel-default ">
                                         <div class="panel-heading">
                                             <h2 class="panel-title">
-                                                <a href="#" aria-haspopup="true" aria-expanded="false"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }} </a>
+                                                <a href="{{ path('homepage', {'slug' : page.name })}}" aria-haspopup="true" aria-expanded="false"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }} </a>
                                                 <a class="lienMenu pull-right lienMenuFront fa fa-chevron-circle-right" data-toggle="collapse" href=".menu{{ page.id }}" aria-hidden="true"></a>
                                             </h2>
                                         </div>
@@ -35,13 +35,13 @@
                                     </ul>
                                 </div>
                             {% else %}
-                                <li class="hidden-xs hidden-sm hidden-md"><a href="#"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }}</a></li>
+                                <li class="hidden-xs hidden-sm hidden-md"><a href="{{ path('homepage', {'slug' : page.name })}}"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }}</a></li>
                                 <div class="hidden-lg">
 
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h2 class="panel-title">
-                                                <a href="#" aria-haspopup="true" aria-expanded="false"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }} </a>
+                                                <a href="{{ path('homepage', {'slug' : page.name })}}" aria-haspopup="true" aria-expanded="false"><i class="{{ page.myClassIcon }}" aria-hidden="true"></i> {{ page.name }} </a>
                                             </h2>
                                         </div>
                                     </div>

@@ -1,0 +1,14 @@
+<h3>Liste des utilisateurs</h3><hr>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#listUser" data-toggle="tab" aria-expanded="true">Liste des utilisateurs</a></li>
+    <li class=""><a href="#formAddUser" data-toggle="tab" aria-expanded="false">Ajouter un utilisateur</a></li>
+</ul><br>
+<div id="myTabContent" class="tab-content container-fluid">
+    <div class="tab-pane fade active in " id="listUser">
+        {{ include('SfCmsProjectCmsBundle:User:listAllUser.html.twig') }}
+    </div>
+    <div class="tab-pane fade" id="formAddUser">
+        {{ include('SfCmsProjectCmsBundle:User:formAddUser.html.twig') }}
+    </div>
+
+</div>

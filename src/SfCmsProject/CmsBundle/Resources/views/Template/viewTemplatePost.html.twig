@@ -1,26 +1,32 @@
 <h3>Liste des templates disponibles pour la création d'article</h3><hr>
+<div>
+    <i class="fa fa-info-circle blue fa-lg" aria-hidden="true"></i>
+    <strong>
+        Les templates d'articles sont utiles quand l'utilisateur souhaite consulter un article en particulier
+        c'est alors le template de cet article qui est utilisé pour la vue
+    </strong>
+</div><hr>
 <ul class="nav nav-tabs">
     <li class="active"><a href="#listTemplate" data-toggle="tab" aria-expanded="true">Liste et édition des templates</a></li>
     <li class=""><a href="#formAddTemplatePost" data-toggle="tab" aria-expanded="false">Ajouter un template</a></li>
 </ul><br>
-<div id="myTabContent" class="tab-content container-fluid">
+<div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active in " id="listTemplate">
-        <div class="row">
-            <div class="col-md-9">
+            <div class="well">
+                <h4>Vos templates d'article</h4><hr>
+                <div id="listNameTemplate">
+                    {% for template in listTemplate %}
+                        <button class="btn btn-default btnLoadViewTemplatePost form-control" data-edit="{{ path('update_form_edit_post') }}" data-name="{{ template.name }}" data-path="{{ path('load_view_template_post')}}" data-reload="{{ path('reload_list_template_post')}}">{{ template.name }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="">
                 <h4>Aperçu de votre template</h4><hr>
                 <div id="loadViewTemplatePost">
 
                 </div>
             </div>
-            <div class="col-md-3 well">
-                <h4>Vos templates d'article</h4><hr>
-                <div id="listNameTemplate">
-                    {% for template in listTemplate %}
-                        <button class="btn btn-default btnLoadViewTemplatePost form-control" data-edit="{{ path('update_form_edit_post') }}" data-name="{{ template.name }}" data-path="{{ path('load_view_template_post')}}">{{ template.name }}</button>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+
         <div class="row container-fluid" id="templateFormEditPost">
         </div>
 

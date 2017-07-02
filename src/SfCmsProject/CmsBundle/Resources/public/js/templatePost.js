@@ -29,6 +29,7 @@ $(function () {
             e.preventDefault();
             var name = $('#sfcmsproject_cmsbundle_addtemplate_post_name').val();
             var content = $('#sfcmsproject_cmsbundle_addtemplate_post_content').val();
+            var csrf = $('#csrfTemplatePost').val();
             $("#loadingViewTemplatePost").show();
 
             $.ajax({
@@ -36,13 +37,16 @@ $(function () {
                 url: $(this).attr('action'),
                 data: {
                     name: name,
-                    content: content
+                    content: content,
+                    csrf: csrf
                 },
                 success: function (response) {
                     $("#loadingViewTemplatePost").hide();
                     $("#templateLoad").html(response);
                     addTemplatePostValid();
                     loadViewTemplatePost();
+                    $("#addTemplatePostSuccess").fadeIn(1000);
+                    $("#addTemplatePostSuccess").fadeOut(1000);
 
                 }
             });
@@ -55,20 +59,25 @@ $(function () {
             var name = $('#sfcmsproject_cmsbundle_edittemplate_post_name').val();
             var content = $('#sfcmsproject_cmsbundle_edittemplate_post_content').val();
             $("#loadingViewTemplatePost").show();
+            var csrf = $('#csrfEditTemplatePost').val();
 
             $.ajax({
                 type: "POST",
                 url: $(this).attr('action'),
                 data: {
                     name: name,
-                    presentName : presentNamePost,
-                    content: content
+                    supName : presentNamePost,
+                    content: content,
+                    csrf: csrf
                 },
                 success: function (response) {
                     $("#loadingViewTemplatePost").hide();
-                    $("#templateLoad").html(response);
-                    addTemplatePostValid();
                     loadViewEditTemplatePost();
+                    presentNamePost = response;
+                    loadViewEditTemplatePost();
+                    loadViewListTemplatePost();
+                    $("#editTemplatePostSuccess").fadeIn(1000);
+                    $("#editTemplatePostSuccess").fadeOut(1000);
 
 
                 }
@@ -82,7 +91,9 @@ $(function () {
             var name = $(this).data('name');
             presentNamePost = $(this).data('name');
             thisPathLoadPost = $(this).data('path');
+            thisPathReloadListPost = $(this).data('reload');
             pathFormEditPost = $(this).data('edit');
+            loadDataFormEditPost();
             $("#loadingViewTemplatePost").show();
 
             $.ajax({
@@ -94,8 +105,9 @@ $(function () {
                 success: function (response) {
                     $("#loadingViewTemplatePost").hide();
                     $("#loadViewTemplatePost").html(response);
-                    loadDataFormEditPost();
-
+                },
+                error:function (request, status, error) {
+                    $("#loadViewTemplatePost").html("Une erreur s'est produite, vérifiez l'ensemble de vos variables");
                 }
             });
         });
@@ -112,9 +124,9 @@ $(function () {
             },
             success: function (response) {
                 $("#loadingViewTemplatePost").hide();
-                $("#loadViewTemplatePost").html(response);
                 loadDataFormEditPost();
-                loadViewTemplatePost();
+                $("#loadViewTemplatePost").html(response);
+
 
             }
         });
@@ -124,12 +136,14 @@ $(function () {
         $('.supTemplatePost').on('click', function (e) {
             e.preventDefault();
             var pathLoad = $(this).data('path');
+            var csrf = $('#csrfSupTemplatePost').val();
             $("#loadingViewTemplatePost").show();
             $.ajax({
                 type: "POST",
                 url: pathLoad,
                 data: {
-                    name: presentNamePost
+                    name: presentNamePost,
+                    csrf: csrf
                 },
                 success: function (response) {
                     $("#loadingViewTemplatePost").hide();
@@ -137,6 +151,8 @@ $(function () {
                     addTemplatePostValid();
                     loadViewTemplatePost();
                     editTemplatePostValid();
+                    $("#removeTemplatePostSuccess").fadeIn(1000);
+                    $("#removeTemplatePostSuccess").fadeOut(1000);
 
                 }
             });
@@ -156,6 +172,20 @@ $(function () {
                 supTemplatePostValid()
 
 
+            }
+        });
+    }
+    // Actualise la liste des noms de template de post
+    function loadViewListTemplatePost() {
+        $("#loadingViewTemplatePost").show();
+
+        $.ajax({
+            type: "POST",
+            url: thisPathReloadListPost,
+            success: function (response) {
+                $("#loadingViewTemplatePost").hide();
+                $("#listNameTemplate").html(response);
+                loadViewTemplatePost();
             }
         });
     }

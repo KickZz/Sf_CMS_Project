@@ -1,0 +1,40 @@
+<table class="table table-striped table-hover ">
+    <thead>
+    <tr>
+        <th>Identifiant</th>
+        <th>Adresse E-mail</th>
+        <th>Roles</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in listUser %}
+
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% for role in user.roles %}
+                        {{ role }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if "ROLE_ADMIN" in user.roles and nbAdmin == 1 %}
+                        Impossible de supprimer<br>
+                        le dernier administrateur.
+                    {% else %}
+                        <div class="btn-group">
+                            <a href="{{ path('edit_user', { 'id' : user.id }) }}" class="editUserForm btn btn-default">Editer</a>
+                            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a data-toggle="modal" data-backdrop="false" data-target="#formSupUser{{ user.id }}">Supprimer</a></li>
+                            </ul>
+                            {{ include("SfCmsProjectCmsBundle:User:windowsSuppressUser.html.twig") }}
+                        </div>
+                    {% endif %}
+                </td>
+            </tr>
+
+    {% endfor %}
+    </tbody>
+</table>

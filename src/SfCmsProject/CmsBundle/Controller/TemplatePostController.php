@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class TemplatePostController extends Controller
 {
     /**
-     * @Route("/cms/admin/viewtemplatepost", name="view_template_post")
+     * @Route("/cms/admin/security/viewtemplatepost", name="view_template_post")
      * @Method({"GET","POST"})
      * @return Response
      */
@@ -31,9 +31,10 @@ class TemplatePostController extends Controller
             $template = new TemplatePost();
             $form = $this->createForm(AddTemplatePostType::class, $template);
             $formEdit = $this->createForm(EditTemplatePostType::class, $template);
-
+            $listMedia = $em->getRepository('SfCmsProjectCmsBundle:Image')->findAll();
             $listTemplate = $em->getRepository('SfCmsProjectCmsBundle:TemplatePost')->findAll();
             $response = $this->render('SfCmsProjectCmsBundle:Template:viewTemplatePost.html.twig', array(
+                'listMedia' => $listMedia,
                 'listTemplate' => $listTemplate,
                 'formEdit' => $formEdit->createView(),
                 'form' => $form->createView()))->getContent();
@@ -46,7 +47,7 @@ class TemplatePostController extends Controller
         }
     }
     /**
-     * @Route("/cms/admin/loadviewtemplatepost", name="load_view_template_post")
+     * @Route("/cms/admin/security/loadviewtemplatepost", name="load_view_template_post")
      * @Method({"GET","POST"})
      * @return Response
      */
@@ -71,7 +72,7 @@ class TemplatePostController extends Controller
     }
     /**
      * @param Request $request
-     * @Route ("/cms/admin/addtemplatepostvalid", name="add_template_post_valid")
+     * @Route ("/cms/admin/security/addtemplatepostvalid", name="add_template_post_valid")
      * @Method({"GET","POST"})
      * @return Response
      */
@@ -84,12 +85,17 @@ class TemplatePostController extends Controller
         // Si la requête est en Ajax
         if ($request->isXmlHttpRequest()) {
 
+            $token = $request->get('csrf');
 
-            $template->setName(str_replace(' ','-',$request->get('name')));
-            $template->setContent($request->get('content'));
+            if ($this->isCsrfTokenValid('csrf_template_post', $token)) {
 
-            $em->persist($template);
-            $em->flush();
+                $template->setName(str_replace(' ', '-', $request->get('name')));
+                $template->setContent($request->get('content'));
+
+                $em->persist($template);
+                $em->flush();
+
+            }
 
             // Appel du service pour créer une vue du nouveau template
             $this->container->get('sf_cms_project_cms.CreateTemplateFile')->createTemplatePostFile($request->get('name'),$request->get('content'));
@@ -97,9 +103,10 @@ class TemplatePostController extends Controller
             // Creation d'un nouvel objet template
             $template = new TemplatePost();
             $form = $this->createForm(AddTemplatePostType::class, $template);
-
+            $listMedia = $em->getRepository('SfCmsProjectCmsBundle:Image')->findAll();
             $listTemplate = $em->getRepository('SfCmsProjectCmsBundle:TemplatePost')->findAll();
             $response = $this->render('SfCmsProjectCmsBundle:Template:viewTemplatePost.html.twig', array(
+                'listMedia' => $listMedia,
                 'listTemplate' => $listTemplate,
                 'formEdit' => $formEdit->createView(),
                 'form' => $form->createView()))->getContent();
@@ -114,7 +121,7 @@ class TemplatePostController extends Controller
     }
     /**
      * @param Request $request
-     * @Route ("/cms/admin/edittemplatepostvalid", name="edit_template_post_valid")
+     * @Route ("/cms/admin/security/edittemplatepostvalid", name="edit_template_post_valid")
      * @Method({"GET","POST"})
      * @return Response
      */
@@ -124,29 +131,26 @@ class TemplatePostController extends Controller
         // Si la requête est en Ajax
         if ($request->isXmlHttpRequest()) {
 
-            $this->container->get('sf_cms_project_cms.SupTemplateFile')->supTemplatePostFile($request->get('presentName'));
-            $template = $em->getRepository('SfCmsProjectCmsBundle:TemplatePost')->findOneBy(array('name'=> $request->get('presentName')));
-            $template->setName(str_replace(' ','-',$request->get('name')));
-            $template->setContent($request->get('content'));
+            $token = $request->get('csrf');
 
-            $em->flush();
+            if ($this->isCsrfTokenValid('csrf_edit_template_post', $token)) {
 
-            // Appel du service pour créer une vue twig du nouveau template
-            $this->container->get('sf_cms_project_cms.CreateTemplateFile')->createTemplatePostFile($request->get('name'),$request->get('content'));
+                $this->container->get('sf_cms_project_cms.SupTemplateFile')->supTemplatePostFile($request->get('supName'));
+                $template = $em->getRepository('SfCmsProjectCmsBundle:TemplatePost')->findOneBy(array('name' => $request->get('supName')));
+                $template->setName(str_replace(' ', '-', $request->get('name')));
+                $template->setContent($request->get('content'));
 
-            //Creation du formulaire d'édition
-            $formEdit = $this->createForm(EditTemplatePostType::class, $template);
-            // Creation d'un nouvel objet template
-            $template = new TemplatePost();
-            $form = $this->createForm(AddTemplatePostType::class, $template);
+                $em->flush();
 
-            $listTemplate = $em->getRepository('SfCmsProjectCmsBundle:TemplatePost')->findAll();
-            $response = $this->render('SfCmsProjectCmsBundle:Template:viewTemplatePost.html.twig', array(
-                'listTemplate' => $listTemplate,
-                'formEdit' => $formEdit->createView(),
-                'form' => $form->createView()))->getContent();
-            return new Response($response);
+                // Appel du service pour créer une vue twig du nouveau template
+                $this->container->get('sf_cms_project_cms.CreateTemplateFile')->createTemplatePostFile($request->get('name'), $request->get('content'));
 
+                return new Response($template->getName());
+            }
+            else
+            {
+                throw new NotFoundHttpException("La page demandée n'existe pas");
+            }
         }
         else
         {
@@ -156,7 +160,7 @@ class TemplatePostController extends Controller
     }
     /**
      * @param Request $request
-     * @Route ("/cms/admin/suptemplatepostvalid", name="sup_template_post_valid")
+     * @Route ("/cms/admin/security/suptemplatepostvalid", name="sup_template_post_valid")
      * @Method({"GET","POST"})
      * @return Response
      */
@@ -166,23 +170,29 @@ class TemplatePostController extends Controller
         // Si la requête est en Ajax
         if ($request->isXmlHttpRequest()) {
 
-            $this->container->get('sf_cms_project_cms.SupTemplateFile')->supTemplatePostFile($request->get('name'));
-            $template = $em->getRepository('SfCmsProjectCmsBundle:TemplatePost')->findOneBy(array('name'=> $request->get('name')));
-            $listPost = $em->getRepository('SfCmsProjectCmsBundle:Post')->findBy(array('template' => $request->get('name')));
-            foreach ($listPost as $post){
-                $post->setTemplate(null);
-            }
-            $em->remove($template);
-            $em->flush();
+            $token = $request->get('csrf');
 
+            if ($this->isCsrfTokenValid('csrf_sup_template_post', $token)) {
+
+                $this->container->get('sf_cms_project_cms.SupTemplateFile')->supTemplatePostFile($request->get('name'));
+                $template = $em->getRepository('SfCmsProjectCmsBundle:TemplatePost')->findOneBy(array('name' => $request->get('name')));
+                $listPost = $em->getRepository('SfCmsProjectCmsBundle:Post')->findBy(array('template' => $request->get('name')));
+                foreach ($listPost as $post) {
+                    $post->setTemplate(null);
+                }
+                $em->remove($template);
+                $em->flush();
+
+            }
             // Creation d'un nouvel objet template
             $template = new TemplatePost();
             $form = $this->createForm(AddTemplatePostType::class, $template);
             //Creation du formulaire d'édition
             $formEdit = $this->createForm(EditTemplatePostType::class, $template);
-
+            $listMedia = $em->getRepository('SfCmsProjectCmsBundle:Image')->findAll();
             $listTemplate = $em->getRepository('SfCmsProjectCmsBundle:TemplatePost')->findAll();
             $response = $this->render('SfCmsProjectCmsBundle:Template:viewTemplatePost.html.twig', array(
+                'listMedia' => $listMedia,
                 'listTemplate' => $listTemplate,
                 'formEdit' => $formEdit->createView(),
                 'form' => $form->createView()))->getContent();
@@ -197,7 +207,7 @@ class TemplatePostController extends Controller
     }
     /**
      * @param Request $request
-     * @Route ("/cms/admin/updateformeditpost", name="update_form_edit_post")
+     * @Route ("/cms/admin/security/updateformeditpost", name="update_form_edit_post")
      * @Method({"GET","POST"})
      * @return Response
      */
@@ -210,9 +220,36 @@ class TemplatePostController extends Controller
             $template = $em->getRepository('SfCmsProjectCmsBundle:TemplatePost')->findOneBy(array('name'=> $request->get('presentName')));
             //Creation du formulaire d'édition
             $formEdit = $this->createForm(EditTemplatePostType::class, $template);
+            $listMedia = $em->getRepository('SfCmsProjectCmsBundle:Image')->findAll();
 
             $response = $this->render('SfCmsProjectCmsBundle:Template:formEditTemplatePost.html.twig', array(
+                'listMedia' => $listMedia,
                 'formEdit' => $formEdit->createView()))->getContent();
+            return new Response($response);
+
+        }
+        else
+        {
+            throw new NotFoundHttpException("La page demandée n'existe pas");
+        }
+
+    }
+
+    /**
+     * @param Request $request
+     * @Route ("/cms/admin/security/reloadlisttemplatepost", name="reload_list_template_post")
+     * @Method({"GET","POST"})
+     * @return Response
+     */
+    public function reloadListTemplatePostAction(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+        // Si la requête est en Ajax
+        if ($request->isXmlHttpRequest()) {
+
+            $listTemplate = $em->getRepository('SfCmsProjectCmsBundle:TemplatePost')->findAll();
+            $response = $this->render('SfCmsProjectCmsBundle:Template:listTemplatePost.html.twig', array(
+                'listTemplate' => $listTemplate))->getContent();
             return new Response($response);
 
         }

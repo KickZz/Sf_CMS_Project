@@ -74,7 +74,7 @@ $(function () {
 
         $( ".listMenu" ).sortable({
 
-            containment: "body",
+            containment: "#containerListMenu",
             connectWith : '.listPageWithoutMenu, .listSubMenu',
             revert : true,
             cursor : 'move',
@@ -113,7 +113,7 @@ $(function () {
     function sortableUpdateOrderPageWithoutMenu() {
         $( ".listPageWithoutMenu" ).sortable({
 
-            containment: "body",
+            containment: "#containerListMenu",
             connectWith : '.listMenu, .listSubMenu',
             revert: true,
             cursor: 'move',
@@ -151,7 +151,7 @@ $(function () {
 
         $( ".listSubMenu" ).sortable({
 
-            containment: "body",
+            containment: "#containerListMenu",
             connectWith : '.listPageWithoutMenu, .listMenu, .listSubMenu',
             revert : true,
             cursor : 'move',

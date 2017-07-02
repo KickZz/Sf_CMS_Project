@@ -27,10 +27,20 @@
         {# Affichage des erreurs pour ce champ précis. #}
         <div id="erreur">{{ form_errors(form.content) }}</div>
     </div>
+    <div class="form-group">
+        <label for="selectTemplate">Selection du template</label>
+        <select id="selectTemplate">
+            <option value="nothing">Aucun</option>
+            {% for template in listTemplate %}
+                <option value="{{ template.name }}">{{ template.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
 
     <div class="form-group">
 
         <button type="submit" class="btn btn-primary">Ajouter</button>
+        <input type="hidden"  id="csrfAddPost" name="csrfAddPost" value="{{ csrf_token('csrf_add_post') }}">
 
     </div>
 
@@ -39,3 +49,9 @@
 
     {# Fermeture de la balise <form> du formulaire HTML #}
 </form>
+{% block javascript %}
+    <script>
+        listPostArray = {{ listPost|raw }};
+        listImageArray = {{ listImage|raw }};
+    </script>
+{% endblock %}

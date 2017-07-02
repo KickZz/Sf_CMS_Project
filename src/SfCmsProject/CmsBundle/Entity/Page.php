@@ -3,6 +3,7 @@
 namespace SfCmsProject\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Page
@@ -39,6 +40,7 @@ class Page
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=20)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -46,14 +48,14 @@ class Page
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotBlank()
      */
     private $content;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="template", type="string", length=25, nullable=true)
+     * @ORM\ManyToOne(targetEntity="SfCmsProject\CmsBundle\Entity\Template", inversedBy="page")
      */
+
     private $template;
 
     /**
@@ -76,6 +78,13 @@ class Page
      * @ORM\Column(name="isHome", type="boolean", nullable=true)
      */
     private $isHome;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="contentPost", type="boolean", nullable=true)
+     */
+    private $contentPost;
 
     /**
      * @var bool
@@ -456,11 +465,11 @@ class Page
     /**
      * Set template
      *
-     * @param string $template
+     * @param \SfCmsProject\CmsBundle\Entity\Template $template
      *
      * @return Page
      */
-    public function setTemplate($template)
+    public function setTemplate(\SfCmsProject\CmsBundle\Entity\Template $template = null)
     {
         $this->template = $template;
 
@@ -470,10 +479,34 @@ class Page
     /**
      * Get template
      *
-     * @return string
+     * @return \SfCmsProject\CmsBundle\Entity\Template
      */
     public function getTemplate()
     {
         return $this->template;
+    }
+
+    /**
+     * Set contentPost
+     *
+     * @param boolean $contentPost
+     *
+     * @return Page
+     */
+    public function setContentPost($contentPost)
+    {
+        $this->contentPost = $contentPost;
+
+        return $this;
+    }
+
+    /**
+     * Get contentPost
+     *
+     * @return boolean
+     */
+    public function getContentPost()
+    {
+        return $this->contentPost;
     }
 }

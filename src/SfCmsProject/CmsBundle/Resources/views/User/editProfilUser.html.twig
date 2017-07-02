@@ -1,0 +1,58 @@
+<h3>Edition de Profil</h3><hr>
+
+<form method="post" action="{{ path('edit_profil_user_valid') }}" class="editProfilUserFormValid">
+
+    {# Les erreurs générales du formulaire. #}
+    <div id="erreur">{{ form_errors(form) }}</div>
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(form.username, "Identifiant" , {'label_attr':{'class':'control-label'}}) }}
+
+        {# Génération de l'input. #}
+        {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+
+        {# Affichage des erreurs pour ce champ précis. #}
+        <div id="erreur">{{ form_errors(form.username) }}</div>
+
+    </div>
+
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(form.email, "Adresse e-mail", {'label_attr':{'class':'control-label'}}) }}
+
+        {# Génération de l'input. #}
+        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+
+        {# Affichage des erreurs pour ce champ précis. #}
+        <div id="erreur">{{ form_errors(form.email) }}</div>
+    </div>
+
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(form.plainTextPassword, "Mot de passe ( 10 caractères minimum )", {'label_attr':{'class':'control-label'}}) }}
+
+        {# Génération de l'input. #}
+        {{ form_widget(form.plainTextPassword, {'attr': {'class': 'form-control'}}) }}
+
+        {# Affichage des erreurs pour ce champ précis. #}
+        <div id="erreur">{{ form_errors(form.plainTextPassword) }}</div>
+    </div>
+
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(form.signature, "Signature ( Lors de la création d'un article )", {'label_attr':{'class':'control-label'}}) }}
+
+        {# Génération de l'input. #}
+        {{ form_widget(form.signature, {'attr': {'class': 'form-control'}}) }}
+
+        {# Affichage des erreurs pour ce champ précis. #}
+        <div id="erreur">{{ form_errors(form.signature) }}</div>
+    </div>
+
+    <div class="form-group">
+
+        <button type="submit" class="btn btn-primary">Editer mon profil</button>
+        <input type="hidden"  id="csrfEditProfilUser" name="csrfEditProfilUser" value="{{ csrf_token('csrf_edit_profil_user') }}">
+
+    </div>
+</form>

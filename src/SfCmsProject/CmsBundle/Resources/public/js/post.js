@@ -21,11 +21,15 @@ $(function () {
             selector:'.tinymce',
             branding: false,
             height : 400,
-            language_url: '../fr_FR.js',
-            language : 'fr_FR',
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect | fontselect",
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image link | fontsizeselect | fontselect",
             fontsize_formats: '8pt 11pt 10pt 12pt 14pt 18pt 24pt 36pt',
-            font_format:'Andale Mono=andale mono,times;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;Comic Sans MS=comic sans ms,sans-serif;Courier New=courier new,courier;Georgia=georgia,palatino;Helvetica=helvetica;Impact=impact,chicago;Symbol=symbol;Tahoma=tahoma,arial,helvetica,sans-serif;Terminal=terminal,monaco;Times New Roman=times new roman,times;Trebuchet MS=trebuchet ms,geneva;Verdana=verdana,geneva;Webdings=webdings;Wingdings=wingdings,zapf dingbats'
+            font_format:'Andale Mono=andale mono,times;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;Comic Sans MS=comic sans ms,sans-serif;Courier New=courier new,courier;Georgia=georgia,palatino;Helvetica=helvetica;Impact=impact,chicago;Symbol=symbol;Tahoma=tahoma,arial,helvetica,sans-serif;Terminal=terminal,monaco;Times New Roman=times new roman,times;Trebuchet MS=trebuchet ms,geneva;Verdana=verdana,geneva;Webdings=webdings;Wingdings=wingdings,zapf dingbats',
+            plugins: "image imagetools link",
+            imagetools_toolbar: "rotateleft rotateright | flipv fliph | editimage imageoptions",
+            menubar: "file edit insert",
+            // variable insérer directement via la vue twig formPost et editPost
+            link_list: listPostArray,
+            image_list:listImageArray
 
         });
     }
@@ -71,6 +75,8 @@ $(function () {
             tinyMCE.triggerSave(true, true);
             var name = $('#sfcmsproject_cmsbundle_addpost_name').val();
             var content = $('#sfcmsproject_cmsbundle_addpost_content').val();
+            var template = $('#selectTemplate').val();
+            var csrf = $('#csrfAddPost').val();
             $("#loadingTemplateAjouterPost").show();
 
             $.ajax({
@@ -78,7 +84,9 @@ $(function () {
                 url: $(this).attr('action'),
                 data: {
                     name: name,
-                    content: content
+                    content: content,
+                    template: template,
+                    csrf: csrf
                 },
                 success: function (response) {
                     $("#loadingTemplateAjouterPost").hide();
@@ -117,6 +125,8 @@ $(function () {
             tinyMCE.triggerSave(true, true);
             var name = $('#sfcmsproject_cmsbundle_post_name').val();
             var content = $('#sfcmsproject_cmsbundle_post_content').val();
+            var template = $('#selectTemplate').val();
+            var csrf = $('#csrfEditPost').val();
             $("#loadingTemplateListPost").show();
 
             $.ajax({
@@ -124,7 +134,9 @@ $(function () {
                 url: $(this).attr('action'),
                 data: {
                     name: name,
-                    content: content
+                    content: content,
+                    template: template,
+                    csrf: csrf
                 },
                 success: function (response) {
                     $("#loadingTemplateListPost").hide();

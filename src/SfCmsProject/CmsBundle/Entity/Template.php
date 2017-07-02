@@ -3,6 +3,7 @@
 namespace SfCmsProject\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Template
@@ -25,6 +26,7 @@ class Template
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=25, unique=true)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -32,8 +34,14 @@ class Template
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotBlank()
      */
     private $content;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SfCmsProject\CmsBundle\Entity\Page", mappedBy="template")
+     */
+    private $page;
 
     /**
      * Get id
@@ -91,5 +99,46 @@ class Template
     public function getContent()
     {
         return $this->content;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->page = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add page
+     *
+     * @param \SfCmsProject\CmsBundle\Entity\Page $page
+     *
+     * @return Template
+     */
+    public function addPage(\SfCmsProject\CmsBundle\Entity\Page $page)
+    {
+        $this->page[] = $page;
+
+        return $this;
+    }
+
+    /**
+     * Remove page
+     *
+     * @param \SfCmsProject\CmsBundle\Entity\Page $page
+     */
+    public function removePage(\SfCmsProject\CmsBundle\Entity\Page $page)
+    {
+        $this->page->removeElement($page);
+    }
+
+    /**
+     * Get page
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPage()
+    {
+        return $this->page;
     }
 }

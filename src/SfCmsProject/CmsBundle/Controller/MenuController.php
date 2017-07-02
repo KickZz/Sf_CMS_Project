@@ -14,7 +14,7 @@ class MenuController extends Controller
 {
     /**
      * @param Request $request
-     * @Route("/cms/admin/menu", name="menu")
+     * @Route("/cms/admin/security/menu", name="menu")
      * @return Response
      * @Method({"GET","POST"})
      */
@@ -53,7 +53,7 @@ class MenuController extends Controller
     }
     /**
      * @param Request $request
-     * @Route("/cms/admin/updatemenu", name="update_menu")
+     * @Route("/cms/admin/security/updatemenu", name="update_menu")
      * @return Response
      * @Method({"GET","POST"})
      */
@@ -87,7 +87,7 @@ class MenuController extends Controller
     }
     /**
      * @param Request $request
-     * @Route("/cms/admin/updatelistpage", name="update_list_page")
+     * @Route("/cms/admin/security/updatelistpage", name="update_list_page")
      * @return Response
      * @Method({"GET","POST"})
      */
@@ -121,7 +121,7 @@ class MenuController extends Controller
     /**
      * @param Request $request
      * @param Page $page
-     * @Route("/cms/admin/updateclasspage/{id}", name="update_class_page")
+     * @Route("/cms/admin/security/updateclasspage/{id}", name="update_class_page")
      * @return Response
      * @Method({"GET","POST"})
      */
@@ -150,7 +150,7 @@ class MenuController extends Controller
     /**
      * @param Request $request
      * @param Page $page
-     * @Route("/cms/admin/updatesubmenu/{id}", name="update_sub_menu")
+     * @Route("/cms/admin/security/updatesubmenu/{id}", name="update_sub_menu")
      * @return Response
      * @Method({"GET","POST"})
      */
@@ -188,7 +188,7 @@ class MenuController extends Controller
     /**
      * @param Request $request
      * @param Page $page
-     * @Route("/cms/admin/updatecountsubpage/{id}", name="update_count_sub_page")
+     * @Route("/cms/admin/security/updatecountsubpage/{id}", name="update_count_sub_page")
      * @return Response
      * @Method({"GET","POST"})
      */

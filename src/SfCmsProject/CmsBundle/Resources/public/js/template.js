@@ -29,6 +29,7 @@ $(function () {
             e.preventDefault();
             var name = $('#sfcmsproject_cmsbundle_addtemplate_name').val();
             var content = $('#sfcmsproject_cmsbundle_addtemplate_content').val();
+            var csrf = $('#csrfTemplatePage').val();
             $("#loadingViewTemplatePage").show();
 
             $.ajax({
@@ -36,13 +37,16 @@ $(function () {
                 url: $(this).attr('action'),
                 data: {
                     name: name,
-                    content: content
+                    content: content,
+                    csrf: csrf
                 },
                 success: function (response) {
                     $("#loadingViewTemplatePage").hide();
                     $("#templateLoad").html(response);
                     addTemplateValid();
                     loadViewTemplate();
+                    $("#addTemplatePageSuccess").fadeIn(1000);
+                    $("#addTemplatePageSuccess").fadeOut(1000);
 
                 }
             });
@@ -54,6 +58,7 @@ $(function () {
             e.preventDefault();
             var name = $('#sfcmsproject_cmsbundle_edittemplate_name').val();
             var content = $('#sfcmsproject_cmsbundle_edittemplate_content').val();
+            var csrf = $('#csrfEditTemplatePage').val();
             $("#loadingViewTemplatePage").show();
 
             $.ajax({
@@ -61,14 +66,17 @@ $(function () {
                 url: $(this).attr('action'),
                 data: {
                     name: name,
-                    presentName : presentName,
-                    content: content
+                    supName : presentName,
+                    content: content,
+                    csrf: csrf
                 },
                 success: function (response) {
                     $("#loadingViewTemplatePage").hide();
-                    $("#templateLoad").html(response);
-                    addTemplateValid();
+                    presentName = response;
                     loadViewEditTemplate();
+                    loadViewListTemplatePage();
+                    $("#editTemplatePageSuccess").fadeIn(1000);
+                    $("#editTemplatePageSuccess").fadeOut(1000);
 
 
                 }
@@ -82,7 +90,10 @@ $(function () {
             var name = $(this).data('name');
             presentName = $(this).data('name');
             thisPathLoad = $(this).data('path');
+            thisPathReloadList = $(this).data('reload');
             pathFormEdit = $(this).data('edit');
+            $("#loadViewTemplate").html("");
+            loadDataFormEdit();
             $("#loadingViewTemplatePage").show();
 
             $.ajax({
@@ -94,8 +105,9 @@ $(function () {
                 success: function (response) {
                     $("#loadingViewTemplatePage").hide();
                     $("#loadViewTemplate").html(response);
-                    loadDataFormEdit();
-
+                },
+                error:function (request, status, error) {
+                    $("#loadViewTemplatePage").html("Une erreur s'est produite, vérifiez l'ensemble de vos variables");
                 }
             });
         });
@@ -112,10 +124,8 @@ $(function () {
                 },
                 success: function (response) {
                     $("#loadingViewTemplatePage").hide();
-                    $("#loadViewTemplate").html(response);
                     loadDataFormEdit();
-                    loadViewTemplate();
-
+                    $("#loadViewTemplate").html(response);
                 }
             });
     }
@@ -124,12 +134,14 @@ $(function () {
         $('.supTemplate').on('click', function (e) {
             e.preventDefault();
             var pathLoad = $(this).data('path');
+            var csrf = $('#csrfSupTemplatePage').val();
             $("#loadingViewTemplatePage").show();
             $.ajax({
                 type: "POST",
                 url: pathLoad,
                 data: {
-                    name: presentName
+                    name: presentName,
+                    csrf: csrf
                 },
                 success: function (response) {
                     $("#loadingViewTemplatePage").hide();
@@ -137,6 +149,8 @@ $(function () {
                     addTemplateValid();
                     loadViewTemplate();
                     editTemplateValid();
+                    $("#removeTemplatePageSuccess").fadeIn(1000);
+                    $("#removeTemplatePageSuccess").fadeOut(1000);
 
                 }
             });
@@ -153,9 +167,21 @@ $(function () {
             success: function (response) {
                 $("#templateFormEdit").html(response);
                 editTemplateValid();
-                supTemplateValid()
+                supTemplateValid();
+            }
+        });
+    }
+     // Actualise la liste des noms de template de page
+    function loadViewListTemplatePage() {
+        $("#loadingViewTemplatePage").show();
 
-
+        $.ajax({
+            type: "POST",
+            url: thisPathReloadList,
+            success: function (response) {
+                $("#loadingViewTemplatePage").hide();
+                $("#listNameTemplate").html(response);
+                loadViewTemplate();
             }
         });
     }

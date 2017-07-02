@@ -22,9 +22,14 @@ class AddPageType extends AbstractType
             ->add('description')
             ->add('isHome', ChoiceType::class, array(
                 'choices' => array(
-                    'Oui' => 'Oui',
-                    'Non' => 'Non',
-                )));
+                    'Non' => 'false',
+                    'Oui' => 'true'
+                )))
+            ->add('contentPost', ChoiceType::class, array(
+            'choices' => array(
+                'Non' => 'false',
+                'Oui' => 'true'
+            )));
     }
 
     /**

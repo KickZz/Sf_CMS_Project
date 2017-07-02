@@ -1,0 +1,22 @@
+<h3>Edition de l'utilisateur</h3><hr>
+    <form method="post" action="{{ path('edit_user_valid', { 'id' : id }) }}" class="editUserFormValid">
+
+        {# Les erreurs générales du formulaire. #}
+        <div id="erreur">{{ form_errors(form) }}</div>
+        <div class="">
+            <label>
+                {# Génération de l'input. #}
+                <span class="fa fa-exclamation-triangle"></span> Role de l'utilisateur ?
+                {{ form_widget(form.roles, {'attr': {'class': 'form-control'}}) }}
+            </label>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-primary">Editer l'utilisateur</button>
+            <input type="hidden"  id="csrfEditUser" name="csrfEditUser" value="{{ csrf_token('csrf_edit_user') }}">
+
+        </div>
+    </form>

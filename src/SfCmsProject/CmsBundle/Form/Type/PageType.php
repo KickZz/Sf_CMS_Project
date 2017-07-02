@@ -18,12 +18,7 @@ class PageType extends AbstractType
         $builder
             ->add('name')
             ->add('content')
-            ->add('description')
-            ->add('isHome', ChoiceType::class, array(
-                'choices' => array(
-                    'Oui' => 'Oui',
-                    'Non' => 'Non',
-                )));
+            ->add('description');
     }
     
     /**

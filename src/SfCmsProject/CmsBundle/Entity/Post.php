@@ -3,6 +3,7 @@
 namespace SfCmsProject\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Post
@@ -25,6 +26,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -32,14 +34,14 @@ class Post
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotBlank()
      */
     private $content;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="template", type="string", length=25, nullable=true)
+     * @ORM\ManyToOne(targetEntity="SfCmsProject\CmsBundle\Entity\TemplatePost", inversedBy="post")
      */
+
     private $template;
 
     /**
@@ -76,7 +78,6 @@ class Post
         
     $this->dateCreated = new \Datetime('now',new \DateTimeZone('Europe/Paris'));
     $this->suppress = false;
-    $this->author = "Undefined";
         
     }
     
